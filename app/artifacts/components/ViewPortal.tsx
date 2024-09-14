@@ -1,50 +1,31 @@
-"use client";
+"use client"
 
-import {
-  Bounds,
-  Environment,
-  Grid,
-  Html,
-  OrbitControls,
-  useProgress,
-} from "@react-three/drei";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
-import { Suspense, useRef } from "react";
-import { Mesh } from "three";
-import { ArtifactProvider, useArtifact } from "./ArtifactContext";
-import { ArtifactIndex } from "./ArtifactIndex";
-import {
-  EffectComposer,
-  Outline,
-  Selection,
-  Select,
-} from "@react-three/postprocessing";
-import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { Bounds, Environment, Grid, Html, OrbitControls, useProgress } from "@react-three/drei"
+import { Canvas, useFrame, useLoader } from "@react-three/fiber"
+import { Suspense, useRef } from "react"
+import { Mesh } from "three"
+import { ArtifactProvider, useArtifact } from "./ArtifactContext"
+import { ArtifactIndex } from "./ArtifactIndex"
+import { EffectComposer, Outline, Selection, Select } from "@react-three/postprocessing"
+import * as THREE from "three"
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 
 export function ViewPortal() {
-  const { selectedArtifact } = useArtifact();
-  const selectedArtifactData = ArtifactIndex.find(
-    (artifact) => artifact.name === selectedArtifact
-  );
+  const { selectedArtifact } = useArtifact()
+  const selectedArtifactData = ArtifactIndex.find((artifact) => artifact.name === selectedArtifact)
   const Model = () => {
-    const gltf = useLoader(GLTFLoader, `/${selectedArtifactData?.file}`);
-    const meshRef = useRef<Mesh>(null);
+    const gltf = useLoader(GLTFLoader, `/${selectedArtifactData?.file}`)
+    const meshRef = useRef<Mesh>(null)
     useFrame(() => {
       if (!meshRef.current) {
-        return;
+        return
       }
-    });
+    })
 
     return (
       <>
         <Bounds fit observe margin={selectedArtifactData?.margin || 1.4}>
-          <mesh
-            scale={selectedArtifactData?.scale}
-            ref={meshRef}
-            receiveShadow
-            castShadow
-          >
+          <mesh scale={selectedArtifactData?.scale} ref={meshRef} receiveShadow castShadow>
             <primitive
               object={gltf.scene}
               position={selectedArtifactData?.position || [0, 0.4, 0]}
@@ -54,8 +35,8 @@ export function ViewPortal() {
           </mesh>
         </Bounds>
       </>
-    );
-  };
+    )
+  }
 
   return (
     <div className="absolute flex w-full h-full font-jet">
@@ -63,15 +44,17 @@ export function ViewPortal() {
         <Canvas
           shadows={"percentage"}
           orthographic
-          camera={{
-            position: [15, 15, 20],
-            zoom: 140,
-            left: -2,
-            right: -2,
-            top: 2,
-            bottom: 2,
-            near: 0.2,
-          }}
+          camera={
+            {
+              // position: [15, 15, 20],
+              // zoom: 140,
+              // left: -2,
+              // right: -2,
+              // top: 2,
+              // bottom: 2,
+              // near: 0.2,
+            }
+          }
           gl={{ logarithmicDepthBuffer: true, antialias: false }}
           dpr={0.45}
         >
@@ -116,10 +99,10 @@ export function ViewPortal() {
         </Canvas>
       </ArtifactProvider>
     </div>
-  );
+  )
 }
 
 function Loader() {
-  const { progress } = useProgress();
-  return <Html center>{progress} % loaded...</Html>;
+  const { progress } = useProgress()
+  return <Html center>{progress} % loaded...</Html>
 }

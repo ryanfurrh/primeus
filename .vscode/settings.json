@@ -9,4 +9,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "prettier.requireConfig": true,
+  "colorize.colorized_variables": [
+    "CSS"
+  ],
 }

@@ -31,3 +31,60 @@
     background: #c0a0b9;
   }
 }
+
+@layer base {
+  :root {
+    --background: 120 2% 90%;
+    --gray: 0 0% 15%;
+    --gray-light: 0 0% 25%;
+
+    --foreground: 120 2% 90%;
+    --foreground-dark: 120 2% 60%;
+
+    --tan: 19 25% 78%;
+    --peach: 5 39% 78%;
+
+    --teal: 171 33% 61%;
+    --teal-light: 170 61% 83%;
+    --teal-dark: 169 14% 30%;
+
+    --orange: 22 38% 72%;
+    --orange-light: 22 70% 90%;
+    --orange-dark: 22 31% 48%;
+
+    --red: 350 76% 73%;
+    --red-light: 350 82% 86%;
+    --red-dark: 350 28% 49%;
+
+    --purple: 322 32% 73%;
+    --purple-light: 322 81% 89%;
+    --purple-dark: 322 21% 38%;
+
+    --green: 129 8% 50%;
+    --green-light: 129 61% 80%;
+    --green-dark: 129 20% 33%;
+
+    --blue: 188 32% 76%;
+    --blue-light: 188 50% 90%;
+    --blue-dark: 188 14% 41%;
+
+    --navy: 209 26% 54%;
+    --navy-light: 209 44% 88%;
+    --navy-dark: 209 20% 33%;
+  }
+
+  .dark {
+    --background: 0 0% 6%;
+    --gray: 0 0% 15%;
+    --gray-light: 0 0% 25%;
+
+    --foreground: 120 2% 90%;
+    --foreground-dark: 120 2% 60%;
+  }
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
