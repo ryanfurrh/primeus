@@ -7,7 +7,6 @@ export { default as DocumentationIcon} from './documentation.svg'
 // // OPERATIONAL ICONS //
 export { default as CloseIcon } from './close.svg'
 export { default as PrimaeLogo } from './primae-logo-1.svg'
-export { default as PrimaeLogoMinimal } from './primae-logo-2.svg'
 export { default as NoImage } from './noimage.svg'
 export { default as ArrowSelect } from './arrow-select.svg'
 export { default as ArrowLeft } from './arrow-left.svg'

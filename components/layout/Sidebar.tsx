@@ -16,12 +16,12 @@ export function Sidebar() {
       <div className="flex flex-col gap-4 p-4">
         {/* Logo + Collapse Toggle */}
         <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            {collapsed ? (
-              <PrimaeLogoMinimal className="w-6 h-6" />
-            ) : (
-              <PrimaeLogo className="w-[98px] h-8 opacity-60" />
-            )}
+          <Link
+            href="/"
+            className="flex items-center gap-2 text-2xl font-semibold tracking-tight font-archivo"
+          >
+            <PrimaeLogo className="w-5 h-5" />
+            {collapsed ? "" : "Primordeūs"}
           </Link>
           <button
             onClick={() => setCollapsed(!collapsed)}

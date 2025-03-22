@@ -1,7 +1,8 @@
-const { fontFamily } = require("tailwindcss/defaultTheme")
 const { mauve, violet } = require("@radix-ui/colors")
+const defaultTheme = require("tailwindcss/defaultTheme")
 
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   darkMode: ["class"],
   // darkMode: ["class"],
