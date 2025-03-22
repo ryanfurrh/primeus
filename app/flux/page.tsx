@@ -1,23 +1,15 @@
-import { PageHeader } from "@/app/components/PageHeader";
-import { CubeFiber } from "@/app/components/flux/CubeFiber";
-import { FluxIcon } from "@/public/icons";
-import Image from "next/image";
+import { CubeFiber } from "@/app/components/flux/CubeFiber"
+import { FluxIcon } from "@/public/icons"
+import Image from "next/image"
 
 export const metadata = {
   title: "Flux",
   description: "",
-};
+}
 
 export default function Page() {
   return (
     <div className="flex flex-col items-center justify-center w-full px-4 rendering-pixelated">
-      <div className="">
-        <PageHeader
-          name={metadata.title}
-          description={metadata.description}
-          icon={<FluxIcon className="w-6 h-6" />}
-        />
-      </div>
       <div className="flex flex-col items-center md:px-12">
         <div className="items-center w-2/3">
           <div className="flex justify-center h-auto gap-9 md:gap-16">
@@ -57,5 +49,5 @@ export default function Page() {
         </div>
       </div>
     </div>
-  );
+  )
 }

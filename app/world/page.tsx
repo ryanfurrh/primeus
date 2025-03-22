@@ -1,9 +1,8 @@
-"use client";
-import { PageHeader } from "@/app/components/PageHeader";
-import { Counter } from "@/app/components/counter";
-import { WorldIcon } from "@/public/icons";
-import Image from "next/image";
-import React from "react";
+"use client"
+import { Counter } from "@/app/components/counter"
+import { WorldIcon } from "@/public/icons"
+import Image from "next/image"
+import React from "react"
 
 // export const metadata = {
 //   title: "world",
@@ -13,14 +12,6 @@ import React from "react";
 export default function Page() {
   return (
     <div className="flex flex-col w-full">
-      <div className="">
-        <PageHeader
-          name="World"
-          description=""
-          icon={<WorldIcon className="w-6 h-6" />}
-        />
-      </div>
-
       <div className="flex justify-center flex-1 md:px-12 ">
         <div className="flex flex-col">
           <div className="flex justify-center h-auto gap-9 md:gap-16">
@@ -59,5 +50,5 @@ export default function Page() {
         </div>
       </div>
     </div>
-  );
+  )
 }

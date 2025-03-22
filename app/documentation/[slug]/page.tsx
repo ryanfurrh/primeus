@@ -1,44 +1,36 @@
-import fs from "fs";
-import Markdown from "markdown-to-jsx";
-import matter from "gray-matter";
-import getPostMetadata from "@/app/components/getPostMetadata";
-import { PageHeader } from "@/app/components/PageHeader";
-import Link from "next/link";
-import Balancer from "react-wrap-balancer";
-import { ArrowLeft, DocumentationIcon } from "@/public/icons";
+import fs from "fs"
+import Markdown from "markdown-to-jsx"
+import matter from "gray-matter"
+import getPostMetadata from "@/app/components/getPostMetadata"
+import Link from "next/link"
+import Balancer from "react-wrap-balancer"
+import { ArrowLeft, DocumentationIcon } from "@/public/icons"
 
 const getPostContent = (slug: string) => {
-  const folder = "posts/";
-  const file = `${folder}${slug}.md`;
-  const content = fs.readFileSync(file, "utf8");
-  const matterResult = matter(content);
-  return matterResult;
-};
+  const folder = "posts/"
+  const file = `${folder}${slug}.md`
+  const content = fs.readFileSync(file, "utf8")
+  const matterResult = matter(content)
+  return matterResult
+}
 
 export const generateStaticParams = async () => {
-  const posts = getPostMetadata();
+  const posts = getPostMetadata()
   return posts.map((post) => ({
     slug: post.slug,
-  }));
-};
+  }))
+}
 
 export const metadata = {
   title: "Documentation",
   description: "",
-};
+}
 
 const PostPage = (props: any) => {
-  const slug = props.params.slug;
-  const post = getPostContent(slug);
+  const slug = props.params.slug
+  const post = getPostContent(slug)
   return (
     <div className="flex flex-col items-center justify-center w-full px-4 font-jet text-pale-100">
-      <div className="mb-8 md:mb-12">
-        <PageHeader
-          name={metadata.title}
-          description={metadata.description}
-          icon={<DocumentationIcon className="w-6 h-6" />}
-        />
-      </div>
       <div className="flex flex-col md:flex-row ">
         <Link href={"/documentation"} className="px-2 md:px-6">
           <ArrowLeft />
@@ -83,7 +75,7 @@ const PostPage = (props: any) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PostPage;
+export default PostPage

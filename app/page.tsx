@@ -1,7 +1,5 @@
 "use client"
 
-import { PageHeader } from "@/app/components/PageHeader"
-import { PrimaeLogoMinimal } from "@/public/icons"
 import Image from "next/image"
 import { Suspense } from "react"
 import { Canvas, useLoader } from "@react-three/fiber"
@@ -26,9 +24,6 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col items-center justify-center w-full px-4">
-      <div className="">
-        <PageHeader name="primæ" description="" icon={<PrimaeLogoMinimal className="w-7 h-7" />} />
-      </div>
       <div className="flex flex-col items-center w-full max-w-lg">
         <h1 className="mb-4 text-center font-jet">hello world.</h1>
 
