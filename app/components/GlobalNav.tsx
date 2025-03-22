@@ -48,8 +48,8 @@ export function GlobalNav() {
       <div
         className={
           isSidebarCollapsed
-            ? "flex flex-row md:flex-col w-full items-center justify-between border-1 border-border rounded bg-card ease-in-out duration-500 transition-all"
-            : "flex flex-row md:flex-col w-full items-center justify-between border-1 border-border rounded h-full overflow-cli md:w-full md:items-start md:h-auto bg-card ease-in-out duration-500 transition-all"
+            ? "flex flex-row md:flex-col w-full items-center justify-between border-1 rounded bg-card ease-in-out duration-500 transition-all"
+            : "flex flex-row md:flex-col w-full items-center justify-between border-1 rounded h-full overflow-cli md:w-full md:items-start md:h-auto bg-card ease-in-out duration-500 transition-all"
         }
       >
         <div>

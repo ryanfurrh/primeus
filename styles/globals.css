@@ -34,15 +34,13 @@
 
 @layer base {
   :root {
-    --background: 120 2% 90%;
-    --gray: 0 0% 15%;
-    --gray-light: 0 0% 25%;
+    --font-archivo: "Archivo", sans-serif;
 
-    --foreground: 120 2% 90%;
-    --foreground-dark: 120 2% 60%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
 
-    --tan: 19 25% 78%;
-    --peach: 5 39% 78%;
+    --gray: 0 0% 85%;
+    --gray-light: 0 0% 95%;
 
     --teal: 171 33% 61%;
     --teal-light: 170 61% 83%;
@@ -52,17 +50,13 @@
     --orange-light: 22 70% 90%;
     --orange-dark: 22 31% 48%;
 
+    --green: 129 60% 60%;
+    --green-light: 129 60% 93%;
+    --green-dark: 129 5% 36%;
+
     --red: 350 76% 73%;
     --red-light: 350 82% 86%;
     --red-dark: 350 28% 49%;
-
-    --purple: 322 32% 73%;
-    --purple-light: 322 81% 89%;
-    --purple-dark: 322 21% 38%;
-
-    --green: 129 8% 50%;
-    --green-light: 129 61% 80%;
-    --green-dark: 129 20% 33%;
 
     --blue: 188 32% 76%;
     --blue-light: 188 50% 90%;
@@ -71,19 +65,50 @@
     --navy: 209 26% 54%;
     --navy-light: 209 44% 88%;
     --navy-dark: 209 20% 33%;
+
+    --purple: 322 32% 73%;
+    --purple-light: 322 81% 89%;
+    --purple-dark: 322 21% 38%;
   }
 
   .dark {
+    --font-archivo: "Archivo", sans-serif;
+
     --background: 0 0% 6%;
+    --foreground: 120 2% 90%;
+
     --gray: 0 0% 15%;
     --gray-light: 0 0% 25%;
 
-    --foreground: 120 2% 90%;
-    --foreground-dark: 120 2% 60%;
+    --teal: 171 33% 61%;
+    --teal-light: 170 61% 83%;
+    --teal-dark: 169 14% 30%;
+
+    --orange: 22 38% 72%;
+    --orange-light: 22 70% 90%;
+    --orange-dark: 22 31% 48%;
+
+    --green: 129 60% 60%;
+    --green-light: 129 60% 93%;
+    --green-dark: 129 5% 36%;
+
+    --red: 350 76% 73%;
+    --red-light: 350 82% 86%;
+    --red-dark: 350 28% 49%;
+
+    --blue: 188 32% 76%;
+    --blue-light: 188 50% 90%;
+    --blue-dark: 188 14% 41%;
+
+    --navy: 209 26% 54%;
+    --navy-light: 209 44% 88%;
+    --navy-dark: 209 20% 33%;
+
+    --purple: 322 32% 73%;
+    --purple-light: 322 81% 89%;
+    --purple-dark: 322 21% 38%;
   }
-  * {
-    @apply border-border;
-  }
+
   body {
     @apply bg-background text-foreground;
   }

@@ -1,14 +1,11 @@
 import "../styles/globals.css"
 import { Analytics } from "@vercel/analytics/react"
-import { GlobalNav } from "@/app/components/GlobalNav"
-
 import { Footer } from "@/app/components/Footer"
-import { Archivo, IBM_Plex_Mono, IBM_Plex_Sans, JetBrains_Mono, Orbitron } from "next/font/google"
-import localFont from "next/font/local"
 import Version from "@/app/components/Version"
 import { ArtifactProvider } from "./artifacts/components/ArtifactContext"
 import { ThemeProvider } from "../components/theme-provider"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { Sidebar } from "@/components/layout/Sidebar"
+import { ibm, archivo, marvin, plexSans, jet } from "@/lib/fonts"
 
 export const metadata = {
   title: "primae",
@@ -18,76 +15,33 @@ export const metadata = {
   },
 }
 
-const archivo = Archivo({
-  subsets: ["latin"],
-  variable: "--font-archivo",
-  axes: ["wdth"],
-})
-
-const jet = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-jet",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
-})
-
-const plexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  variable: "--font-plex-sans",
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
-})
-
-const marvin = localFont({
-  src: "../public/fonts/MarvinVisionsBig-Bold.woff2",
-  variable: "--font-marvin",
-  weight: "800",
-})
-
-const ibm = IBM_Plex_Mono({
-  subsets: ["latin"],
-  variable: "--font-ibm",
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
-
-  display: "swap",
-})
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      className={`${ibm.variable} ${archivo.variable} ${marvin.variable} ${plexSans.variable} ${jet.variable} pixelated`}
+      lang="en"
+      className={`${ibm.variable} ${archivo.variable} ${marvin.variable} ${plexSans.variable} ${jet.variable} pixelated font-jet`}
     >
       <ArtifactProvider>
         <body
-          className="flex flex-col w-full h-screen font-archivo bg-background"
+          className="flex w-full h-screen bg-background text-foreground"
           style={{ WebkitFontSmoothing: "none" }}
         >
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
+            defaultTheme="dark"
             enableSystem
             disableTransitionOnChange
+            value={{ light: "light", dark: "dark" }}
           >
-            <header className="flex flex-row">
-              <div className="z-10 flex justify-between w-full md:w-auto mt-6 mx-6 mb-0 md:h-[calc(100vh-3rem)] md:fixed md:flex-col font-archivo ">
-                <GlobalNav />
+            <Sidebar />
 
-                <div className="flex flex-col gap-4">
-                  <div className="hidden md:flex">
-                    <ThemeToggle />
-                  </div>
-                  <div className="hidden md:flex">
-                    <Version />
-                  </div>
-                </div>
-              </div>
-            </header>
-
-            <main className="flex flex-col justify-between flex-1 h-full">
-              <div className="flex w-full md:pl-[124px] h-full">
+            <div className="flex flex-col flex-1 h-full overflow-hidden">
+              <main className="flex-1 overflow-y-auto">
                 {children}
                 <Analytics />
-              </div>
+              </main>
               <Footer />
-            </main>
+            </div>
           </ThemeProvider>
         </body>
       </ArtifactProvider>

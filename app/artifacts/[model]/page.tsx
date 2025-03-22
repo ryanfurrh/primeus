@@ -22,19 +22,27 @@ export default function ModelPage() {
   }
 
   return (
-    <div className="flex flex-col gap-4 mt-12">
+    <div className="flex flex-col w-full gap-4 mt-4 md:mt-12">
       <ModelSelect />
-      <div className="flex flex-row w-full h-full gap-4">
-        <div className="flex w-full border max-h-[500px] border-foreground">
+      <div className="flex flex-col justify-center w-full gap-4 md:flex-row">
+        <div className="flex w-full border-y md:border max-w-[500px] min-h-[700px] border-foreground">
           <ViewPort modelId={modelData.file} />
         </div>
-        <div className="flex flex-col w-1/3">
+        <div className="flex flex-col w-full px-3 md:max-w-sm">
           <p className="">{modelData.date}</p>
           <h1 className="text-2xl text-orangeDark">{modelData.name}</h1>
           <p className="py-4">{modelData.description}</p>
-          <div className="flex flex-col gap-2 text-redDark">
-            <p>Dimensions: {modelData.dimensions}</p>
-            <p>Weight: {modelData.weight}</p>
+          <div className="flex flex-col gap-2 ">
+            <p className="text-redDark">
+              {modelData.weight} <span className="text-foreground">kg</span>
+            </p>
+            <div className="flex flex-row gap-3 text-redDark">
+              {Object.entries(modelData.dimensions).map(([key, value]) => (
+                <p key={key}>
+                  {value} <span className="text-foreground">in.</span>
+                </p>
+              ))}
+            </div>
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ const { mauve, violet } = require("@radix-ui/colors")
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: ["class"],
   // darkMode: ["class"],
   content: [
     "./pages/**/*.{js,ts,tsx}",
@@ -13,7 +14,7 @@ module.exports = {
   ],
   theme: {
     container: {
-      center: true,
+      center: "true",
       padding: "2rem",
       screens: {
         "2xl": "1400px",
@@ -21,48 +22,33 @@ module.exports = {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        secondaryforeground: "hsl(var(--secondary-foreground))",
-        card: "hsl(var(--card))",
-        teal: "hsl(var(--teal))",
         gray: "hsl(var(--gray))",
-        grayLight: "hsl(var(--gray-light))",
-        foreground: "hsl(var(--foreground))",
-        foregroundDark: "hsl(var(--foreground-dark))",
-        tan: "hsl(var(--tan))",
-        peach: "hsl(var(--peach))",
+        "gray-light": "hsl(var(--gray-light))",
         teal: "hsl(var(--teal))",
-        tealLight: "hsl(var(--teal-light))",
-        tealDark: "hsl(var(--teal-dark))",
+        "teal-light": "hsl(var(--teal-light))",
+        "teal-dark": "hsl(var(--teal-dark))",
         orange: "hsl(var(--orange))",
-        orangeLight: "hsl(var(--orange-light))",
-        orangeDark: "hsl(var(--orange-dark))",
-        red: "hsl(var(--red))",
-        redLight: "hsl(var(--red-light))",
-        redDark: "hsl(var(--red-dark))",
-        purple: "hsl(var(--purple))",
-        purpleLight: "hsl(var(--purple-light))",
-        purpleDark: "hsl(var(--purple-dark))",
+        "orange-light": "hsl(var(--orange-light))",
+        "orange-dark": "hsl(var(--orange-dark))",
         green: "hsl(var(--green))",
-        greenLight: "hsl(var(--green-light))",
-        greenDark: "hsl(var(--green-dark))",
+        "green-light": "hsl(var(--green-light))",
+        "green-dark": "hsl(var(--green-dark))",
+        red: "hsl(var(--red))",
+        "red-light": "hsl(var(--red-light))",
+        "red-dark": "hsl(var(--red-dark))",
         blue: "hsl(var(--blue))",
-        blueLight: "hsl(var(--blue-light))",
-        blueDark: "hsl(var(--blue-dark))",
+        "blue-light": "hsl(var(--blue-light))",
+        "blue-dark": "hsl(var(--blue-dark))",
         navy: "hsl(var(--navy))",
-        navyLight: "hsl(var(--navy-light))",
-        navyDark: "hsl(var(--navy-dark))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
+        "navy-light": "hsl(var(--navy-light))",
+        "navy-dark": "hsl(var(--navy-dark))",
+        purple: "hsl(var(--purple))",
+        "purple-light": "hsl(var(--purple-light))",
+        "purple-dark": "hsl(var(--purple-dark))",
         ...mauve,
         ...violet,
-        // other colors...
         sand: {
           50: "#f7f5f3",
           100: "#efece7",
@@ -98,13 +84,25 @@ module.exports = {
         pale: {
           100: "#D6C3BA",
         },
+        sidebar: {
+          DEFAULT: "hsl(var(--sidebar-background))",
+          foreground: "hsl(var(--sidebar-foreground))",
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+          border: "hsl(var(--sidebar-border))",
+          ring: "hsl(var(--sidebar-ring))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+        },
       },
       fontFamily: {
-        ibm: ["var(--font-ibm)", ...fontFamily.mono],
-        marvin: ["var(--font-marvin)", ...fontFamily.sans],
-        plexSans: ["var(--font-plex-sans)", ...fontFamily.sans],
-        archivo: ["var(--font-archivo)", ...fontFamily.sans],
-        jet: ["var(--font-jet)", ...fontFamily.mono],
+        mono: ["var(--font-ibm)", ...defaultTheme.fontFamily.mono],
+        archivo: ["var(--font-archivo)", ...defaultTheme.fontFamily.sans],
+        jet: ["var(--font-jet)", ...defaultTheme.fontFamily.mono],
+        plexSans: ["var(--font-plex-sans)", ...defaultTheme.fontFamily.sans],
+        marvin: ["var(--font-marvin)", ...defaultTheme.fontFamily.sans],
       },
       screens: {
         xs: "450px",
@@ -116,12 +114,20 @@ module.exports = {
       },
       keyframes: {
         "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
         },
         "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
         },
       },
       animation: {
