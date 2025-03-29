@@ -1,36 +1,31 @@
 "use client"
 
 import * as React from "react"
-import { Sun } from "lucide-react"
 import { useTheme } from "next-themes"
-
-import { Button } from "@/components/ui/button"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Moon, SunHorizon } from "@phosphor-icons/react/dist/ssr"
+import { Switch } from "@/components/ui/switch"
 
 export function ThemeToggle() {
-  const { setTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
+  const [isDark, setIsDark] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsDark(theme === "dark")
+  }, [theme])
+
+  const toggleTheme = (checked: boolean) => {
+    setIsDark(checked)
+    setTheme(checked ? "dark" : "light")
+  }
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="icon">
-          <SunHorizon className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="start">
-        <DropdownMenuItem onClick={() => setTheme("light")}>Light</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>Dark</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>System</DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="flex items-center justify-center gap-2 pt-4 text-xs uppercase text-muted-foreground">
+      <span className={`${!isDark ? "opacity-100" : "opacity-40"} transition-opacity`}>Light</span>
+      <Switch
+        checked={isDark}
+        onCheckedChange={toggleTheme}
+        className="w-12 h-4 border rounded-none dark:border-tan light:border-blue bg-background"
+      />
+      <span className={`${isDark ? "opacity-100" : "opacity-40"} transition-opacity`}>Dark</span>
+    </div>
   )
 }
