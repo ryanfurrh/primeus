@@ -1,8 +1,8 @@
 // components/layout/SidebarItem.tsx
 import Link from "next/link"
 import { useSelectedLayoutSegment } from "next/navigation"
-import clsx from "clsx"
 import { type Item } from "@/app/NavIndex"
+import clsx from "clsx"
 
 export function SidebarItem({ item, collapsed }: { item: Item; collapsed: boolean }) {
   const segment = useSelectedLayoutSegment()
@@ -12,11 +12,11 @@ export function SidebarItem({ item, collapsed }: { item: Item; collapsed: boolea
     <Link
       href={`/${item.slug}`}
       className={clsx(
-        "flex items-center px-3 py-2 rounded text-sm transition-all font-medium",
+        "group flex items-center px-3 py-2 rounded text-sm font-medium transition-all duration-500",
+        collapsed ? "w-24" : "gap-2",
         isActive
-          ? "bg-muted text-foreground"
-          : "text-muted-foreground hover:text-foreground hover:bg-muted",
-        collapsed ? "justify-center" : "gap-2"
+          ? "bg-sand-300/90 text-sand-800 dark:bg-orange/20 dark:text-pale-100 transition-all ease-in-out"
+          : "text-muted-foreground hover:bg-sand-300/70 hover:text-foreground dark:hover:bg-ink-800 dark:hover:text-pale-100"
       )}
     >
       <div className="w-5 h-5">{item.icon}</div>
