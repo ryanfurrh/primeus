@@ -39,6 +39,9 @@
     --background: 0 0% 100%;
     --foreground: 0 0% 10%;
 
+    --tan: 19 25% 78%;
+    --peach: 5 39% 78%;
+
     --gray: 0 0% 85%;
     --gray-light: 0 0% 95%;
 
@@ -76,6 +79,9 @@
 
     --background: 0 0% 6%;
     --foreground: 120 2% 90%;
+
+    --tan: 19 25% 78%;
+    --peach: 5 39% 78%;
 
     --gray: 0 0% 15%;
     --gray-light: 0 0% 25%;

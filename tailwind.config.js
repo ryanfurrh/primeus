@@ -27,6 +27,8 @@ module.exports = {
         foreground: "hsl(var(--foreground))",
         gray: "hsl(var(--gray))",
         "gray-light": "hsl(var(--gray-light))",
+        tan: "hsl(var(--tan))",
+        peach: "hsl(var(--peach))",
         teal: "hsl(var(--teal))",
         "teal-light": "hsl(var(--teal-light))",
         "teal-dark": "hsl(var(--teal-dark))",
