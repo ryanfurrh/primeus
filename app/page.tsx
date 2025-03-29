@@ -23,10 +23,8 @@ export default function HomePage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center w-full px-4">
+    <div className="flex flex-col items-center justify-center w-full px-4 pt-48">
       <div className="flex flex-col items-center w-full max-w-lg">
-        <h1 className="mb-4 text-center font-jet">hello world.</h1>
-
         <div className="relative flex w-full h-auto">
           <Image
             src="/gifs/dot-grid-movement.gif"
