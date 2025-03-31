@@ -21,11 +21,19 @@ export function getAllNotes() {
 
     const relativePath = path.relative(baseDir, fullPath)
     const slug = slugify(relativePath)
+    const fileName = path.basename(relativePath, ".md") // <- important
 
+    console.log("hello!")
+    console.log(`[note] slug: ${slug} → ${fullPath}`)
     return {
-      slug, // this becomes the URL path
-      title: data.title || slug.split("/").pop(),
+      slug, // used for routing
+      fileName, // for resolving wiki links
+      title: data.title || fileName,
       tags: data.tags || [],
+      fullPath,
     }
   })
+}
+export function debugNotes() {
+  getAllNotes().forEach((n) => console.log(`[DEBUG] ${n.fileName} → ${n.slug}`))
 }
