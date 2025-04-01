@@ -1,34 +1,24 @@
-import { IconType } from "react-icons";
+import { IconType } from "react-icons"
 import {
   ArtifactDatabaseIcon,
   DocumentationIcon,
   FluxIcon,
   PrimaeLogo,
   WorldIcon,
-} from "@/public/icons";
+} from "@/public/icons"
 
 export type Item = {
-  name?: string;
-  slug: string;
-  description?: string;
-  icon: any;
-};
+  name?: string
+  slug: string
+  description?: string
+  icon: any
+}
 
 export const NavIndex: { items: Item[] }[] = [
   {
     items: [
       {
-        name: "Flux",
-        slug: "flux",
-        description: "string",
-        icon: <FluxIcon className="w-full h-auto" />,
-      },
-    ],
-  },
-  {
-    items: [
-      {
-        name: "World",
+        name: "world_",
         slug: "world",
         description: "string",
         icon: <WorldIcon className="w-full h-auto" />,
@@ -38,7 +28,7 @@ export const NavIndex: { items: Item[] }[] = [
   {
     items: [
       {
-        name: "Artifacts",
+        name: "artifacts_",
         slug: "artifacts",
         description: "string",
         icon: <ArtifactDatabaseIcon className="w-full h-auto" />,
@@ -48,11 +38,11 @@ export const NavIndex: { items: Item[] }[] = [
   {
     items: [
       {
-        name: "Documentation",
+        name: "documentation_",
         slug: "documentation",
         description: "string",
         icon: <DocumentationIcon className="w-full h-auto" />,
       },
     ],
   },
-];
+]
