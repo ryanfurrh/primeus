@@ -6,11 +6,29 @@ import { NavIndex } from "@/app/NavIndex"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { ArrowLeft, PrimaeLogo } from "@/public/icons"
 import Link from "next/link"
-import { useState } from "react"
 import clsx from "clsx"
+import { useEffect, useRef, useState } from "react"
+import type { ScrambleInHandle } from "@/fancy/components/text/scramble-in"
 
 export function Sidebar() {
   const [collapsed, setCollapsed] = useState(false)
+
+  // Flatten the list of items
+  const items = NavIndex.flatMap((section) => section.items)
+
+  const scrambleRefs = useRef<(ScrambleInHandle | null)[]>([])
+
+  useEffect(() => {
+    if (collapsed) {
+      scrambleRefs.current.forEach((ref) => ref?.reset?.()) // hypothetical method
+      return
+    }
+    items.forEach((_, index) => {
+      setTimeout(() => {
+        scrambleRefs.current[index]?.start()
+      }, index * 150) // Adjust timing here
+    })
+  }, [items])
 
   return (
     <aside className={clsx("flex w-48 pt-96 pb-12")}>
@@ -21,13 +39,20 @@ export function Sidebar() {
         )}
       >
         {/* Logo */}
-        <div className="relative z-0 flex pt-6 pb-2 pl-4">
+        <div className="relative z-0 flex pt-6 pb-2 pl-5">
           <Link
             href="/"
-            className="inline-flex justify-end h-6 gap-2 text-xl font-semibold tracking-tight font-archivo"
+            className="inline-flex justify-start h-6 gap-2 text-xl font-semibold tracking-tight font-archivo"
           >
-            <PrimaeLogo className="text-teal" />
-            {!collapsed && <span>Primordeūs</span>}
+            <PrimaeLogo className="flex-shrink-0 text-teal" />
+            <div
+              className={clsx(
+                "transition-all",
+                collapsed ? "opacity-0 w-0 truncate" : "opacity-100 w-full"
+              )}
+            >
+              Primordeūs
+            </div>
           </Link>
           <button
             onClick={() => setCollapsed(!collapsed)}
@@ -45,17 +70,20 @@ export function Sidebar() {
         <div
           className={clsx(
             "flex flex-col justify-between flex-1 h-full bg-card transition-all",
-            collapsed ? "w-24" : "md:w-48"
+            collapsed ? "w-16" : "md:w-48"
           )}
         >
           <div className="flex w-full h-4 border-t border-r border-tan" />
           <div className="z-10 flex flex-col h-full gap-1 py-4 bg-background">
-            <nav className="flex flex-col">
-              {NavIndex.map((section) =>
-                section.items.map((item) => (
-                  <SidebarItem key={item.slug} item={item} collapsed={collapsed} />
-                ))
-              )}
+            <nav className="flex flex-col gap-4 pl-2">
+              {items.map((item, index) => (
+                <SidebarItem
+                  key={item.slug}
+                  item={item}
+                  collapsed={collapsed}
+                  ref={(el) => (scrambleRefs.current[index] = el)}
+                />
+              ))}
             </nav>
           </div>
 

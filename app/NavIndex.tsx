@@ -8,7 +8,7 @@ import {
 } from "@/public/icons"
 
 export type Item = {
-  name?: string
+  name: string
   slug: string
   description?: string
   icon: any
