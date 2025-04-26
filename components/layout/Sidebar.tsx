@@ -6,9 +6,10 @@ import { NavIndex } from "@/app/NavIndex"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { ArrowLeft, PrimaeLogo } from "@/public/icons"
 import Link from "next/link"
-import clsx from "clsx"
+import { cn } from "@/lib/utils"
 import { useEffect, useRef, useState } from "react"
 import type { ScrambleInHandle } from "@/fancy/components/text/scramble-in"
+import Version from "@/app/components/Version"
 
 export function Sidebar() {
   const [collapsed, setCollapsed] = useState(false)
@@ -31,10 +32,10 @@ export function Sidebar() {
   }, [items])
 
   return (
-    <aside className={clsx("flex w-48 pt-96 pb-12")}>
+    <aside className={cn("flex w-48 pt-96")}>
       <div
-        className={clsx(
-          "flex flex-col justify-between w-full h-full bg-background text-foreground transition-all ease-in-out overflow-visible",
+        className={cn(
+          "flex flex-col justify-between w-full h-full bg-background text-foreground transition-all duration-500 ease-in-out overflow-visible",
           collapsed ? "w-24" : "md:w-48"
         )}
       >
@@ -46,8 +47,8 @@ export function Sidebar() {
           >
             <PrimaeLogo className="flex-shrink-0 text-teal" />
             <div
-              className={clsx(
-                "transition-all",
+              className={cn(
+                "transition-all duration-500 ease-in-out",
                 collapsed ? "opacity-0 w-0 truncate" : "opacity-100 w-full"
               )}
             >
@@ -68,14 +69,14 @@ export function Sidebar() {
 
         {/* Nav Box */}
         <div
-          className={clsx(
-            "flex flex-col justify-between flex-1 h-full bg-card transition-all",
+          className={cn(
+            "flex flex-col justify-between flex-1 h-full bg-card transition-all duration-500 ease-in-out",
             collapsed ? "w-16" : "md:w-48"
           )}
         >
           <div className="flex w-full h-4 border-t border-r border-tan" />
-          <div className="z-10 flex flex-col h-full gap-1 py-4 bg-background">
-            <nav className="flex flex-col gap-4 pl-2">
+          <div className="z-10 flex flex-col h-full gap-1 py-4">
+            <nav className="flex flex-col gap-2">
               {items.map((item, index) => (
                 <SidebarItem
                   key={item.slug}
@@ -89,10 +90,11 @@ export function Sidebar() {
 
           {/* Footer */}
           <div className="flex items-center justify-start p-4">
-            <ThemeToggle />
+            <ThemeToggle collapsed={collapsed} />
           </div>
           <div className="flex w-full h-4 border-b border-r border-tan" />
         </div>
+        <Version />
       </div>
     </aside>
   )

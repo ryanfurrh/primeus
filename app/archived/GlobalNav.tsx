@@ -6,7 +6,7 @@ import Image from "next/image"
 import { useSelectedLayoutSegment } from "next/navigation"
 import clsx from "clsx"
 import { useState } from "react"
-import { ArrowLeft, ArrowSelect, Close, Menu, PrimaeLogo, PrimaeLogoMinimal } from "@/public/icons"
+import { ArrowLeft, ArrowSelect, Close, Menu, PrimaeLogo } from "@/public/icons"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export function GlobalNav() {
