@@ -3,9 +3,14 @@
 import Image from "next/image"
 import { Suspense } from "react"
 import { Canvas, useLoader } from "@react-three/fiber"
-import { OrbitControls, PerspectiveCamera } from "@react-three/drei"
+import { OrbitControls } from "@react-three/drei"
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader"
 import Computer1 from "./artifacts/models/Computer1"
+import { PageHeader } from "@/components/PageHeader"
+import { Readout } from "@/components/data/Readout"
+import { Badge } from "@/components/data/Badge"
+
+const { version } = require("/package.json")
 
 // export const metadata = {
 //   title: "Primævus",
@@ -23,25 +28,19 @@ export default function HomePage() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center w-full px-4 pt-48">
-      <div className="flex flex-col items-center w-full max-w-lg">
-        <div className="relative flex w-full h-auto">
+    <div className="flex flex-col items-center pb-8">
+      <PageHeader name="primæ" readout="A RECORD OF THE FIRST AGE" />
+      <div className="box-border flex flex-col items-center w-full max-w-[620px] px-6 pt-10">
+        <span className="font-mono text-[16px] text-sand-700 dark:text-pale-100">hello world.</span>
+
+        <div className="relative flex w-full h-[300px] md:h-[500px] mt-8 overflow-hidden border border-sand-300 border-t-[10px] border-t-sand-400 dark:border-ink-100/40 dark:border-t-ink-100 hover:cursor-grab active:cursor-grabbing">
           <Image
             src="/gifs/dot-grid-movement.gif"
-            alt={""}
-            width={500}
-            height={500}
-            className="absolute flex -z-10 w-full right-[0]"
+            alt=""
+            fill
+            className="object-cover opacity-50 -z-10"
           />
-        </div>
-
-        <div className="flex w-full mb-12 h-[300px] md:h-[500px] hover:cursor-grab active:cursor-grabbing relative">
-          <div className="absolute bottom-0 w-full px-4 py-4 mb-4 ">
-            <div className="flex flex-col justify-center gap-12 md:gap-36 place-items-center">
-              <p className="z-10 px-4 py-4 bg-background border-1 border-pale-100/50">Welcome.</p>
-            </div>
-          </div>
-          <div className="z-0 w-full">
+          <div className="absolute inset-0 z-0">
             <Canvas
               camera={{
                 zoom: 100,
@@ -54,10 +53,32 @@ export default function HomePage() {
               <OrbitControls />
               <ambientLight />
               <Suspense fallback={null}>
-                <Computer1 />
+                <Model />
               </Suspense>
             </Canvas>
           </div>
+
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-between p-8 pointer-events-none">
+            <span className="px-3 py-1.5 border border-sand-300 dark:border-ink-100/40 bg-sand-100/70 dark:bg-ink-800/70 font-mono text-[16px] text-sand-700 dark:text-pale-100">
+              Welcome.
+            </span>
+            <span className="px-3 py-1.5 border border-sand-300 dark:border-ink-100/40 bg-sand-100/70 dark:bg-ink-800/70 font-mono text-[16px] text-sand-700 dark:text-pale-100">
+              A record of the first age.
+            </span>
+          </div>
+
+          <div className="absolute z-10 flex items-center gap-2 left-3 bottom-3">
+            <Badge dot>Orbit · Auto</Badge>
+            <Readout fields={["MODEL", "computer1.gltf", "ZOOM 100"]} className="text-[9px]" />
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between w-full mt-3">
+          <Readout
+            fields={["DEPT. OF ENERGY", "EMERGING ENERGY DIV.", "FIELD OFFICE 04"]}
+            className="text-[9px]"
+          />
+          <Readout fields={[`version ${version}`, "in-world"]} tone="loading" className="text-[9px]" />
         </div>
       </div>
     </div>
