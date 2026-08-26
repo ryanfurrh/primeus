@@ -6,17 +6,21 @@ import WindowHeader from "./components/WindowHeader"
 import ArtifactData from "./components/ArtifactData"
 import TensionMonitor from "./components/TensionMonitor"
 import ModelSelect from "./components/ModelSelect"
-import { GridBackdrop } from "@/components/GridBackdrop"
 
 /* ArtifactProvider already wraps the whole app in app/layout.tsx, so
    selection state here is the same global context WindowHeader,
    ArtifactData and TensionMonitor already consumed — nothing new to wire
    there, just assembling components that existed but were never rendered
-   into this page. */
+   into this page.
+
+   No GridBackdrop here (unlike Home/Shell) — Ryan wants this page to be a
+   real full-bleed 3D view window with the ground carried by the real
+   in-scene grid (ViewPortal, styled to match), not a second competing 2D
+   CSS lattice layered underneath it. The R3F Canvas is transparent by
+   default, so the two would otherwise blend and clutter the view. */
 const ArtifactsPage = () => {
   return (
     <div className="relative flex w-full h-full min-h-[480px] overflow-hidden">
-      <GridBackdrop variant="isometric" />
       {/* wash-rgb isn't a token this repo imports (Stage 1 translated the kit's
           CSS-custom-property layer to Tailwind classes) — hardcoded to the
           real light/dark values from tokens/semantic.css instead of a

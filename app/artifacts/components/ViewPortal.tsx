@@ -39,9 +39,8 @@ export function ViewPortal() {
   }
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center font-mono">
+    <div className="absolute inset-0 flex font-mono">
       <ArtifactProvider>
-        <div className="w-[460px] h-[460px]">
         <Canvas
           shadows={"percentage"}
           orthographic
@@ -69,8 +68,8 @@ export function ViewPortal() {
               <EffectComposer autoClear={false}>
                 <Outline
                   edgeStrength={21}
-                  visibleEdgeColor={0x66cdaa}
-                  hiddenEdgeColor={0x66cdaa}
+                  visibleEdgeColor={0x1be4b4}
+                  hiddenEdgeColor={0x1be4b4}
                   width={5000}
                 />
               </EffectComposer>
@@ -79,13 +78,19 @@ export function ViewPortal() {
               </Select>
             </Selection>
           </Suspense>
+          {/* Real in-scene ground, styled to the site's --energized value
+              (#1BE4B4 / flux in tailwind.config.js) — the same fixed teal
+              WindowHeader/ArtifactData use, rather than the page-level CSS
+              GridBackdrop lattice, which the full-bleed canvas would just
+              hide (see app/artifacts/page.tsx). */}
           <Grid
             infiniteGrid
             fadeDistance={80}
             fadeStrength={5}
-            sectionColor={0x66cdaa}
-            sectionThickness={10}
-            cellColor={0x66cdaa}
+            sectionColor={0x1be4b4}
+            sectionThickness={1}
+            cellColor={0x1be4b4}
+            cellThickness={0.5}
           />
           <OrbitControls
             target={[0.3, 2, 0]}
@@ -98,7 +103,6 @@ export function ViewPortal() {
           />
           <fog />
         </Canvas>
-        </div>
       </ArtifactProvider>
     </div>
   )
