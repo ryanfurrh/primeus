@@ -41,6 +41,8 @@ export default function HomePage() {
             src="/gifs/dot-grid-movement.gif"
             alt=""
             fill
+            priority
+            sizes="(min-width: 620px) 620px, 100vw"
             className="object-cover opacity-50 -z-10"
           />
           <div className="absolute inset-0 z-0">
