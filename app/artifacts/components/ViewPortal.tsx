@@ -39,8 +39,9 @@ export function ViewPortal() {
   }
 
   return (
-    <div className="absolute flex w-full h-full font-mono">
+    <div className="absolute inset-0 flex items-center justify-center font-mono">
       <ArtifactProvider>
+        <div className="w-[460px] h-[460px]">
         <Canvas
           shadows={"percentage"}
           orthographic
@@ -97,6 +98,7 @@ export function ViewPortal() {
           />
           <fog />
         </Canvas>
+        </div>
       </ArtifactProvider>
     </div>
   )

@@ -53,7 +53,7 @@ export default function TensionMonitor() {
       className={
         selectedArtifact === "Welcome"
           ? "hidden"
-          : "relative flex flex-col w-full h-48 overflow-hidden border border-pale-100/40 bg-ink-900/85 backdrop-blur-sm font-mono"
+          : "relative flex flex-col w-full h-48 overflow-hidden rounded-[4px] border border-pale-100/40 bg-ink-900/85 backdrop-blur-[6px] font-mono"
       }
     >
       <h3 className="absolute z-10 px-1 py-1 text-[12px] font-semibold tracking-wider top-3 left-3 bg-neptune-800/50 text-neptune-400">

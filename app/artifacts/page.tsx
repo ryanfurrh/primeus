@@ -6,6 +6,7 @@ import WindowHeader from "./components/WindowHeader"
 import ArtifactData from "./components/ArtifactData"
 import TensionMonitor from "./components/TensionMonitor"
 import ModelSelect from "./components/ModelSelect"
+import { GridBackdrop } from "@/components/GridBackdrop"
 
 /* ArtifactProvider already wraps the whole app in app/layout.tsx, so
    selection state here is the same global context WindowHeader,
@@ -15,6 +16,21 @@ import ModelSelect from "./components/ModelSelect"
 const ArtifactsPage = () => {
   return (
     <div className="relative flex w-full h-full min-h-[480px] overflow-hidden">
+      <GridBackdrop variant="isometric" />
+      {/* wash-rgb isn't a token this repo imports (Stage 1 translated the kit's
+          CSS-custom-property layer to Tailwind classes) — hardcoded to the
+          real light/dark values from tokens/semantic.css instead of a
+          var(--wash-rgb) reference that would resolve to nothing. */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none dark:hidden"
+        style={{ background: "radial-gradient(55% 45% at 50% 42%, rgba(178,216,210,0.35), transparent 70%)" }}
+      />
+      <span
+        aria-hidden="true"
+        className="absolute inset-0 hidden pointer-events-none dark:block"
+        style={{ background: "radial-gradient(55% 45% at 50% 42%, rgba(48,96,89,0.35), transparent 70%)" }}
+      />
       <ViewPortal />
       <WindowHeader />
 
