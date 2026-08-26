@@ -32,11 +32,11 @@ export function Sidebar() {
   }, [items])
 
   return (
-    <aside className={cn("flex w-48 pt-96")}>
+    <aside className={cn("flex pt-96", collapsed ? "w-[110px]" : "w-[280px]")}>
       <div
         className={cn(
           "flex flex-col justify-between w-full h-full bg-background text-foreground transition-all duration-500 ease-in-out overflow-visible",
-          collapsed ? "w-24" : "md:w-48"
+          collapsed ? "w-[110px]" : "md:w-[280px]"
         )}
       >
         {/* Logo */}
@@ -71,7 +71,7 @@ export function Sidebar() {
         <div
           className={cn(
             "flex flex-col justify-between flex-1 h-full bg-card transition-all duration-500 ease-in-out",
-            collapsed ? "w-16" : "md:w-48"
+            collapsed ? "w-[110px]" : "md:w-[280px]"
           )}
         >
           <div className="flex w-full h-4 border-t border-r border-tan" />
