@@ -63,7 +63,7 @@ export function ThemeToggle({ collapsed }: { collapsed?: boolean }) {
             onCheckedChange={toggleTheme}
             collapsed={collapsed}
             className={cn(
-              "border rounded-none dark:border-tan self-end w-12 h-3 light:border-blue bg-background transition-all",
+              "border rounded-none dark:border-tan self-end w-12 h-3 light:border-blue bg-background transition-all duration-300 ease-in-out",
               collapsed ? "w-3 h-12 " : ""
             )}
           />

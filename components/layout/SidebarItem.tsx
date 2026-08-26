@@ -21,9 +21,9 @@ export const SidebarItem = forwardRef<ScrambleInHandle, SidebarItemProps>(
       <Link
         href={`/${item.slug}`}
         className={cn(
-          "group flex items-center h-4 pr-3 pl-5 py-4 text-sm font-medium transition-all gap-3",
+          "group flex items-center h-4 pr-3 pl-5 py-4 text-sm font-medium transition-all duration-500 ease-in-out gap-3",
           isActive
-            ? "bg-sand-300/90 text-sand-800 dark:bg-orange/20 dark:text-pale-100 transition-all"
+            ? "bg-sand-300/90 text-sand-800 dark:bg-orange/20 dark:text-pale-100 transition-all ease-in-out"
             : "text-muted-foreground hover:bg-sand-300/70 hover:text-foreground dark:hover:bg-ink-800 dark:hover:text-pale-100"
         )}
       >

@@ -48,8 +48,8 @@ export function GlobalNav() {
       <div
         className={
           isSidebarCollapsed
-            ? "flex flex-row md:flex-col w-full items-center justify-between border-1 rounded bg-card transition-all"
-            : "flex flex-row md:flex-col w-full items-center justify-between border-1 rounded h-full overflow-cli md:w-full md:items-start md:h-auto bg-card transition-all"
+            ? "flex flex-row md:flex-col w-full items-center justify-between border-1 rounded bg-card ease-in-out duration-500 transition-all"
+            : "flex flex-row md:flex-col w-full items-center justify-between border-1 rounded h-full overflow-cli md:w-full md:items-start md:h-auto bg-card ease-in-out duration-500 transition-all"
         }
       >
         <div>
@@ -83,8 +83,8 @@ export function GlobalNav() {
         <div
           className={
             menuOpen
-              ? "fixed mt-40 right-11 z-20"
-              : "fixed mt-40 right-[-100%] z-20"
+              ? "fixed mt-40 right-11 ease-in-out duration-300 z-20"
+              : "fixed mt-40 right-[-100%] ease-in-out duration-300 z-20"
           }
         >
           <div className="flex md:hidden">
@@ -94,8 +94,8 @@ export function GlobalNav() {
         <div
           className={
             menuOpen
-              ? "fixed right-[88px] top-0 w-[calc(100vw-112px)] xs:w-auto my-6 h-fit md:hidden bg-card bg-opacity-95 border-1 border-sand-400 z-20"
-              : "fixed right-[-100%] top-0 w-[calc(100vw-112px)] xs:w-auto my-6 h-screen-1/2 md:hidden bg-sand-100 bg-opacity-95 border-1 border-sand-400 z-20"
+              ? "fixed right-[88px] top-0 w-[calc(100vw-112px)] xs:w-auto my-6 h-fit md:hidden bg-card bg-opacity-95 border-1 border-sand-400 ease-in-out duration-300 z-20"
+              : "fixed right-[-100%] top-0 w-[calc(100vw-112px)] xs:w-auto my-6 h-screen-1/2 md:hidden bg-sand-100 bg-opacity-95 border-1 border-sand-400 ease-in-out duration-500 z-20"
           }
         >
           <nav className="flex flex-col " onClick={() => setMenuOpen(false)}>
