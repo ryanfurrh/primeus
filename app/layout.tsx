@@ -5,7 +5,7 @@ import Version from "@/app/components/Version"
 import { ArtifactProvider } from "./artifacts/components/ArtifactContext"
 import { ThemeProvider } from "../components/theme-provider"
 import { Sidebar } from "@/components/layout/Sidebar"
-import { ibm, archivo, marvin, plexSans, jet } from "@/lib/fonts"
+import { fontVars } from "@/app/fonts"
 
 export const metadata = {
   title: "primae",
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${ibm.variable} ${archivo.variable} ${marvin.variable} ${plexSans.variable} ${jet.variable} pixelated font-jet`}
+      className={`${fontVars} pixelated font-mono`}
     >
       <ArtifactProvider>
         <body

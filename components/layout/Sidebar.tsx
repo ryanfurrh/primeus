@@ -35,7 +35,7 @@ export function Sidebar() {
     <aside className={cn("flex w-48 pt-96")}>
       <div
         className={cn(
-          "flex flex-col justify-between w-full h-full bg-background text-foreground transition-all duration-500 ease-in-out overflow-visible",
+          "flex flex-col justify-between w-full h-full bg-background text-foreground transition-all overflow-visible",
           collapsed ? "w-24" : "md:w-48"
         )}
       >
@@ -43,12 +43,12 @@ export function Sidebar() {
         <div className="relative z-0 flex pt-6 pb-2 pl-5">
           <Link
             href="/"
-            className="inline-flex justify-start h-6 gap-2 text-xl font-semibold tracking-tight font-archivo"
+            className="inline-flex justify-start h-6 gap-2 text-xl font-semibold tracking-tight font-instrument"
           >
             <PrimaeLogo className="flex-shrink-0 text-teal" />
             <div
               className={cn(
-                "transition-all duration-500 ease-in-out",
+                "transition-all",
                 collapsed ? "opacity-0 w-0 truncate" : "opacity-100 w-full"
               )}
             >
@@ -60,7 +60,7 @@ export function Sidebar() {
             className="absolute right-0 transition-all text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft
-              className={`w-4 h-4 transform transition-all duration-500 ${
+              className={`w-4 h-4 transform transition-all ${
                 collapsed ? "-rotate-180" : ""
               }`}
             />
@@ -70,7 +70,7 @@ export function Sidebar() {
         {/* Nav Box */}
         <div
           className={cn(
-            "flex flex-col justify-between flex-1 h-full bg-card transition-all duration-500 ease-in-out",
+            "flex flex-col justify-between flex-1 h-full bg-card transition-all",
             collapsed ? "w-16" : "md:w-48"
           )}
         >

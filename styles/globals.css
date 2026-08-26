@@ -34,8 +34,6 @@
 
 @layer base {
   :root {
-    --font-archivo: "Archivo", sans-serif;
-
     --background: 0 0% 100%;
     --foreground: 0 0% 10%;
 
@@ -75,8 +73,6 @@
   }
 
   .dark {
-    --font-archivo: "Archivo", sans-serif;
-
     --background: 0 0% 6%;
     --foreground: 120 2% 90%;
 

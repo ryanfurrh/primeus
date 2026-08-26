@@ -39,7 +39,7 @@ export function ViewPortal() {
   }
 
   return (
-    <div className="absolute flex w-full h-full font-jet">
+    <div className="absolute flex w-full h-full font-mono">
       <ArtifactProvider>
         <Canvas
           shadows={"percentage"}
