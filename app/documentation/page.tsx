@@ -1,24 +1,17 @@
-import PostPreview from "@/app/components/PostPreview"
-import getPostMetadata from "@/app/components/getPostMetadata"
-import { DocumentationIcon } from "@/public/icons"
-import Link from "next/link"
+import { getAllDisclosuresWithContent } from "@/lib/getAllDisclosures"
+import { DocumentationClient } from "./DocumentationClient"
 
 export const metadata = {
   title: "Documentation",
   description: "",
 }
 
-const documentation = () => {
-  const postMetadata = getPostMetadata()
-  const postPreviews = postMetadata.map((post) => <PostPreview key={post.slug} {...post} />)
-
-  return (
-    <div className="flex flex-col items-center justify-center w-full px-4">
-      <div className="grid grid-cols-1 gap-4 px-4 mt-12 justify-items-center md:justify-items-center lg:grid-cols-2 md:mx-16">
-        {postPreviews}
-      </div>
-    </div>
-  )
+/* Server component — getAllDisclosuresWithContent() reads the filesystem
+   (vault/disclosures/), so it can't run inside DocumentationClient, which
+   needs "use client" for the three-move interactive state. Eagerly loads
+   every record's content here and hands it down as a prop; the corpus is a
+   handful of records, so there's no reason for per-record fetching. */
+export default function DocumentationPage() {
+  const records = getAllDisclosuresWithContent()
+  return <DocumentationClient records={records} />
 }
-
-export default documentation

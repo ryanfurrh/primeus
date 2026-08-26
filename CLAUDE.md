@@ -88,18 +88,41 @@ Repo-specific calls that override the generic rules above. A future pass should 
   upstream/kit content, not this repo's target). `app/archived/flux/` and
   `app/components/flux/CubeThree.tsx` were removed as dead code.
 - **Dynamic routes are in scope and must keep working**, even though the design system spec
-  doesn't mention them: `app/documentation/[slug]/page.tsx`, `app/artifacts/[model]/page.tsx`,
+  doesn't mention them: `app/documentation/[...slug]/page.tsx`, `app/artifacts/[model]/page.tsx`,
   `app/world/[...slug]/page.tsx`, `app/world/tags/[tag]/page.tsx`. The spec's simpler
-  single-screen model doesn't get to delete real, working routes.
+  single-screen model doesn't get to delete real, working routes. (`documentation/[slug]`
+  became a catch-all when disclosures moved into per-source subfolders under
+  `vault/disclosures/` and their slugs became nested — same reasoning World's catch-all
+  already used, not a departure from "must keep working".) It's a standalone deep link now,
+  not part of the three-move flow's own navigation — nothing in `DocumentationClient.tsx`
+  routes through it.
 - **The kit governs appearance, the repo governs behavior.** Where a component already has
   real data wiring (e.g. `TensionMonitor.tsx`'s live wireframe canvas, vs. the kit's static
   "no reading on this channel" placeholder), keep the real wiring and apply the kit's visual
   treatment around it — don't regress working functionality to match a simpler design
   reference.
+- **Artifacts is a full-page 3D view window**, not the spec's 460x460 centred mount — Ryan's
+  call. The real in-scene grid (`ViewPortal.tsx`) carries the ground, recoloured to
+  `--energized` (`#1BE4B4`); there's no 2D CSS `GridBackdrop` on this page, since a
+  transparent full-bleed canvas would just layer on top of one and clutter the view.
+- **Document sheets don't use the kit's memo template fields** (TOP SECRET stamp, TO/FROM/
+  SUBJECT, page count). The disclosure records are real authored notes, not intercepted
+  classified correspondence — fabricating a classification banner or a sender/recipient that
+  doesn't exist would break "nothing invents lore". The sheet keeps the kit's chassis (paper,
+  ink, Courier Prime, dashed top rule) with a masthead built from real metadata (title,
+  source, entry, date, fileNo) instead.
 
 ## Known gaps
 
-- `app/world/` is a construction hold upstream — content and build still on hold pending a
-  decision on where the vault markdown comes from (see the World surface plan).
-- `app/documentation/` (the disclosure index) is still on the old flat-post model, not yet
-  built out to the spec's three-move source → record → light-table flow.
+- No further gaps tracked for Shell, Home, Artifacts, World or Documentation as of the
+  disclosure-index rebuild — all five surfaces are live. Remaining open threads, if picked
+  back up:
+  - World's visual design is still the original plain list/prose (`app/world/*`) — connected
+    to real content (`vault/world/`), but not yet built out to the spec's WorldScreen
+    treatment (frame index, cross-reference, calibration). Ryan asked specifically for the
+    vault to be connected, not a redesign; the Calibration mechanic built for Documentation
+    (`lib/calibration.ts`, `components/data/CalibratedText.tsx`) is ready to reuse here if
+    that redesign happens.
+  - `vault/world` and `vault/disclosures` are read from the filesystem at request/build
+    time — no extra plumbing needed for "push an update, see it live" beyond a normal
+    deploy picking up the new files.

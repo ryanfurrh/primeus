@@ -9,7 +9,7 @@
  * not routed through a helper function.
  */
 import localFont from "next/font/local"
-import { Instrument_Sans, Overpass_Mono } from "next/font/google"
+import { Instrument_Sans, Overpass_Mono, Courier_Prime } from "next/font/google"
 
 export const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
@@ -90,6 +90,17 @@ export const redaction20 = localFont({
 export const redaction10 = localFont({
   src: [{ path: "../public/fonts/Redaction_10-Regular.woff2", weight: "400", style: "normal" }],
   variable: "--font-redaction-10",
+  display: "swap",
+})
+
+// The one sanctioned exception to the three-voice type system: a document
+// sheet is a photographed object, not system chrome. Uses .className (not
+// .variable) — applied directly on the sheet component, not the global
+// fontVars list, so it stays scoped to exactly one place.
+export const courierPrime = Courier_Prime({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 })
 
