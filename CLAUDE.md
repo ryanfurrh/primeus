@@ -111,18 +111,23 @@ Repo-specific calls that override the generic rules above. A future pass should 
   doesn't exist would break "nothing invents lore". The sheet keeps the kit's chassis (paper,
   ink, Courier Prime, dashed top rule) with a masthead built from real metadata (title,
   source, entry, date, fileNo) instead.
+- **World's parser fixes one real bug in vault.js's own bullet regex** rather than
+  reproducing it: `/^(?:[-*]|\d+\.)\s*(.*)$/` treats a bare leading `*` as a bullet marker,
+  which also matches the first `*` of a `**bold**` line and visibly breaks it (e.g.
+  `**Usage**:` misparses as a bullet reading `*Usage**:`). `lib/parseVaultPage.ts` requires
+  the marker be followed by whitespace instead. Every other part of the parser (callouts,
+  wikilinks, headings, tab-nested bullets, embeds) is a faithful line-for-line port.
 
 ## Known gaps
 
-- No further gaps tracked for Shell, Home, Artifacts, World or Documentation as of the
-  disclosure-index rebuild — all five surfaces are live. Remaining open threads, if picked
-  back up:
-  - World's visual design is still the original plain list/prose (`app/world/*`) — connected
-    to real content (`vault/world/`), but not yet built out to the spec's WorldScreen
-    treatment (frame index, cross-reference, calibration). Ryan asked specifically for the
-    vault to be connected, not a redesign; the Calibration mechanic built for Documentation
-    (`lib/calibration.ts`, `components/data/CalibratedText.tsx`) is ready to reuse here if
-    that redesign happens.
-  - `vault/world` and `vault/disclosures` are read from the filesystem at request/build
-    time — no extra plumbing needed for "push an update, see it live" beyond a normal
-    deploy picking up the new files.
+- No further gaps tracked for Shell, Home, Artifacts, World or Documentation — all five
+  surfaces are live and built out to the site spec (World as of the WorldScreen rebuild:
+  frame index, cross-reference, real Calibration mechanic reused from Documentation).
+- `vault/world` and `vault/disclosures` are read from the filesystem at request/build
+  time — no extra plumbing needed for "push an update, see it live" beyond a normal
+  deploy picking up the new files.
+- World's `folder` grouping is derived mechanically from each file's real parent directory
+  (first path segment, uppercased; top-level files are UNFILED), not from vault.js's own
+  curated `folder` field. The two differ in exactly one place: vault.js hand-grouped the
+  empty top-level `Phenomena.md` under "FLUX" for display purposes; here it falls out
+  honestly as UNFILED, matching where the file actually lives. Deliberate, not a bug.

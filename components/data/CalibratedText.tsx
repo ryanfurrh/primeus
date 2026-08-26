@@ -1,5 +1,5 @@
 // components/data/CalibratedText.tsx
-import { ElementType, ReactNode } from "react"
+import { CSSProperties, ElementType, ReactNode } from "react"
 import { cn } from "@/lib/utils"
 import { calibrationStep, CALIBRATION_LIGATURES } from "@/lib/calibration"
 
@@ -17,6 +17,7 @@ interface CalibratedTextProps {
   prose?: boolean
   tag?: ElementType
   className?: string
+  style?: CSSProperties
 }
 
 /* A page renders at the fidelity it has earned — never authored. One glyph
@@ -25,7 +26,7 @@ interface CalibratedTextProps {
    structure never decays. Ported from the design system's
    components/data/CalibratedText.jsx — same algorithm, Tailwind cal10-100
    classes (from Stage 1's tailwind.config.js) instead of --font-cal-* vars. */
-export function CalibratedText({ children, fidelity = 1, prose = true, tag = "p", className }: CalibratedTextProps) {
+export function CalibratedText({ children, fidelity = 1, prose = true, tag = "p", className, style }: CalibratedTextProps) {
   const text = typeof children === "string" ? children : String(children ?? "")
   const terms: [number, number][] = []
   let removed = 0
@@ -68,6 +69,7 @@ export function CalibratedText({ children, fidelity = 1, prose = true, tag = "p"
         "m-0 text-[16px] leading-[24px] text-sand-700 dark:text-pale-100",
         className
       )}
+      style={style}
     >
       {runs.map((r, i) => (
         <span
