@@ -50,13 +50,13 @@ export default function TensionMonitor() {
 
   return (
     <div
-      className={`${
+      className={
         selectedArtifact === "Welcome"
           ? "hidden"
-          : "absolute flex w-full h-full font-mono"
-      }`}
+          : "relative flex flex-col w-full h-48 overflow-hidden border border-pale-100/40 bg-ink-900/85 backdrop-blur-sm font-mono"
+      }
     >
-      <h3 className="absolute w-[calc(100%-32px)] px-1 py-1 text-sm font-semibold tracking-wider top-4 left-4 bg-neptune-800/50 text-neptune-400">
+      <h3 className="absolute z-10 px-1 py-1 text-[12px] font-semibold tracking-wider top-3 left-3 bg-neptune-800/50 text-neptune-400">
         Tension Monitor
       </h3>
       <Canvas

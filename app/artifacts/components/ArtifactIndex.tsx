@@ -7,6 +7,7 @@ export const ArtifactIndex: {
   margin?: number;
   date?: string;
   use?: string;
+  integrity?: number;
 }[] = [
   {
     name: "Welcome",
@@ -14,6 +15,7 @@ export const ArtifactIndex: {
     scale: 2.5,
     rotation: [0.2, 0.2, 0.5],
     date: "2023/05/15",
+    integrity: 6,
   },
 
   {
@@ -23,6 +25,7 @@ export const ArtifactIndex: {
     position: [0, 0.3, 0],
     date: "2020/03/27",
     use: "Device which aides in harnassing the power of Flux energy. Worn by high ranking monks.",
+    integrity: 4,
   },
 
   {
@@ -33,6 +36,7 @@ export const ArtifactIndex: {
     margin: 1,
     date: "2020/03/27",
     use: "The raw vital energy or life consciousness that exists in all things.",
+    integrity: 2,
   },
 
   // {
