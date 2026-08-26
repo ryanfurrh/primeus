@@ -23,8 +23,8 @@ export const SidebarItem = forwardRef<ScrambleInHandle, SidebarItemProps>(
         className={cn(
           "group flex items-center h-4 pr-3 pl-5 py-4 text-sm font-medium transition-all duration-500 ease-in-out gap-3",
           isActive
-            ? "bg-sand-300/90 text-sand-800 dark:bg-orange/20 dark:text-pale-100 transition-all ease-in-out"
-            : "text-muted-foreground hover:bg-sand-300/70 hover:text-foreground dark:hover:bg-ink-800 dark:hover:text-pale-100"
+            ? "bg-nav-current text-sand-900 dark:bg-nav-current-dark dark:text-ink-50 shadow-[inset_2px_0_0_0_theme(colors.sand.700)] dark:shadow-[inset_2px_0_0_0_theme(colors.pale.100)] transition-all ease-in-out"
+            : "text-muted-foreground hover:bg-nav-hover dark:hover:bg-nav-hover-dark hover:text-foreground dark:hover:text-pale-100"
         )}
       >
         <div className="flex-shrink-0 w-4 h-4">{item.icon}</div>

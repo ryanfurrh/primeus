@@ -124,6 +124,14 @@ module.exports = {
         // Signals — no ramps. They mean a state, so they never tint or shade.
         flux: "#1BE4B4",
         alert: "#EE8495",
+        // Rail row grounds. `current` marks location, never power — flux stays
+        // reserved for what's drawing energy, not for where you are.
+        nav: {
+          current: "#E4DACB",
+          hover: "#EFECE7",
+          "current-dark": "#3A2C27",
+          "hover-dark": "#1C1A19",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

@@ -43,9 +43,9 @@ export function Sidebar() {
         <div className="relative z-0 flex pt-6 pb-2 pl-5">
           <Link
             href="/"
-            className="inline-flex justify-start h-6 gap-2 text-xl font-semibold tracking-tight font-instrument"
+            className="inline-flex justify-start h-6 gap-2 text-[22px] font-bold tracking-[-0.02em] font-instrument"
           >
-            <PrimaeLogo className="flex-shrink-0 text-teal" />
+            <PrimaeLogo className="flex-shrink-0 text-neptune-600" />
             <div
               className={cn(
                 "transition-all duration-500 ease-in-out",
@@ -57,10 +57,10 @@ export function Sidebar() {
           </Link>
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className="absolute right-0 transition-all text-muted-foreground hover:text-foreground"
+            className="absolute right-0 flex items-center justify-center w-[18px] h-[18px] border border-ink-400/40 dark:border-pale-100/30 transition-all text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft
-              className={`w-4 h-4 transform transition-all duration-500 ${
+              className={`w-3 h-3 transform transition-all duration-500 ${
                 collapsed ? "-rotate-180" : ""
               }`}
             />

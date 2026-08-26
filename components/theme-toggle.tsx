@@ -28,7 +28,7 @@ export function ThemeToggle({ collapsed }: { collapsed?: boolean }) {
     <div className="relative flex text-xs uppercase select-none text-muted-foreground">
       <div
         className={cn(
-          "flex select-none items-center relative justify-center pt-4 text-[12px] uppercase text-muted-foreground transition-all",
+          "flex select-none items-center relative justify-center pt-4 text-[12px] font-mono tracking-[0.12em] uppercase text-muted-foreground transition-all",
           collapsed ? "gap-1.5" : "gap-2"
         )}
       >
