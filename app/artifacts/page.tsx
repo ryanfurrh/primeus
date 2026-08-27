@@ -23,7 +23,7 @@ const ArtifactsPage = () => {
     // -mx cancels the root layout's gutter so the 3D stage runs edge-to-edge
     // under the floating rail. flex-1 (not w-full) so the negative margins
     // expand it to exactly the viewport width instead of overflowing.
-    <div className="relative flex flex-1 h-full min-h-[480px] overflow-hidden -mx-6 md:-mx-[72px]">
+    <div className="relative flex flex-1 h-full min-h-[480px] overflow-hidden -ml-[84px] -mr-4 md:-mx-[72px]">
       {/* wash-rgb isn't a token this repo imports (Stage 1 translated the kit's
           CSS-custom-property layer to Tailwind classes) — hardcoded to the
           real light/dark values from tokens/semantic.css instead of a

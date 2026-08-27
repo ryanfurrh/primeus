@@ -95,16 +95,27 @@ export default function HomePage() {
 
           <div className="absolute z-10 flex items-center gap-2 left-3 bottom-3">
             <Badge dot>Orbit · Auto</Badge>
-            <Readout fields={["MODEL", "computer1.gltf", "ZOOM 125", "DPR 0.40"]} className="text-[9px]" />
+            {/* The full instrument readout is wider than a phone; the orbit
+                chip alone carries the state down there. */}
+            <Readout
+              fields={["MODEL", "computer1.gltf", "ZOOM 125", "DPR 0.40"]}
+              className="hidden md:inline text-[9px]"
+            />
           </div>
         </div>
 
-        <div className="flex items-center justify-between w-full mt-3">
+        {/* Stacks and wraps below md — side by side these two run well past
+            a phone's width. */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-1 md:gap-0 w-full mt-3">
           <Readout
             fields={["DEPT. OF ENERGY", "EMERGING ENERGY DIV.", "FIELD OFFICE 04"]}
-            className="text-[9px]"
+            className="text-[9px] whitespace-normal md:whitespace-nowrap"
           />
-          <Readout fields={[`version ${version}`, "in-world"]} tone="loading" className="text-[9px]" />
+          <Readout
+            fields={[`version ${version}`, "in-world"]}
+            tone="loading"
+            className="text-[9px] whitespace-normal md:whitespace-nowrap"
+          />
         </div>
       </div>
     </div>

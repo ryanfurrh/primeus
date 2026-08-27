@@ -24,7 +24,7 @@ export function SourceKey({
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       className={cn(
-        "flex w-52 flex-col items-start gap-3 border p-4 text-left cursor-pointer transition-colors",
+        "flex w-full md:w-52 flex-col items-start gap-3 border p-4 text-left cursor-pointer transition-colors",
         hover
           ? "border-sand-900 dark:border-pale-100 bg-sand-900/[0.06] dark:bg-pale-100/[0.06]"
           : "border-sand-300 dark:border-ink-100/40 bg-sand-100 dark:bg-ink-800"

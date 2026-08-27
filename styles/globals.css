@@ -32,6 +32,20 @@
   }
 }
 
+/* The disclosure sheet's scale. Full size on mobile, where the sheet
+   reflows to the pane width and needs its type legible; shrunk from md up,
+   where it's the fixed 604px paper sitting on the light table. `zoom`
+   rather than a transform so the element's layout box shrinks too and its
+   scroll pane measures correctly — see ArchiveClient. */
+.sheet-scale {
+  zoom: 1;
+}
+@media (min-width: 768px) {
+  .sheet-scale {
+    zoom: 0.66;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

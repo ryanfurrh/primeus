@@ -138,8 +138,10 @@ export function Sidebar() {
       </div>
 
       {/* Pinned to the viewport's bottom-left rather than riding the bottom
-          of the centred stack, so it stays put as the rail collapses. */}
-      <div className="fixed bottom-4 left-4 z-30">
+          of the centred stack, so it stays put as the rail collapses. Hidden
+          below md: the chip is wider than the collapsed rail, so down there
+          it sat on top of the page content rather than beside it. */}
+      <div className="hidden md:block fixed bottom-4 left-4 z-30">
         <Version />
       </div>
     </aside>

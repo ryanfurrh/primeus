@@ -98,12 +98,12 @@ function ChooseSource({
   onPick: (source: string) => void
 }) {
   return (
-    <div className="mx-auto my-auto flex max-w-[780px] flex-col items-center px-10 text-center">
+    <div className="mx-auto my-auto flex w-full max-w-[780px] flex-col items-center px-2 md:px-10 py-8 text-center">
       <span className="font-mono text-[9px] tracking-[0.2em] text-neptune-600 dark:text-neptune-400">
         {String(records.length).padStart(2, "0")} RECORDS · {String(groups.length).padStart(2, "0")} SOURCES
         {yearRange ? ` · ${yearRange}` : ""}
       </span>
-      <span className="mt-3.5 font-prose text-[46px] font-bold leading-[1.05] text-sand-900 dark:text-ink-50">
+      <span className="mt-3.5 font-prose text-[28px] md:text-[46px] font-bold leading-[1.05] text-sand-900 dark:text-ink-50">
         The Disclosure Index
       </span>
       <p className="mt-4 max-w-[560px] font-instrument text-[15px] leading-[25px] text-sand-700/85 dark:text-pale-100/80">
@@ -113,7 +113,9 @@ function ChooseSource({
       <span className="mb-3 mt-[34px] font-instrument text-[12px] font-bold uppercase tracking-[0.10em] text-neptune-600 dark:text-neptune-400">
         Select a source
       </span>
-      <div className="flex flex-row gap-3">
+      {/* Three fixed-width keys can't sit in a row on a phone — they stack
+          and go full width instead of running off the side. */}
+      <div className="flex w-full flex-col md:flex-row md:w-auto gap-3">
         {groups.map((g) => (
           <SourceKey
             key={g.source}
@@ -142,7 +144,7 @@ function ChooseRecord({
   const g = groups.find((x) => x.source === group)
   if (!g) return null
   return (
-    <div className="mx-auto my-auto flex w-[560px] flex-col items-center px-10">
+    <div className="mx-auto my-auto flex w-full max-w-[560px] flex-col items-center px-2 md:px-10 py-8">
       <div className="flex w-full items-center gap-3 border-b border-sand-300 dark:border-ink-100/40 pb-3">
         <BackKey onClick={onBack} />
         <span className="mr-auto font-instrument text-[16px] font-bold text-sand-900 dark:text-ink-50">
@@ -176,8 +178,11 @@ function ReadRecord({
   onBack: () => void
 }) {
   return (
-    <div className="flex flex-1 flex-row gap-6 p-6 min-h-0">
-      <div className="flex w-[296px] flex-shrink-0 flex-col overflow-auto border border-sand-300 dark:border-ink-100/40 bg-[rgba(38,38,38,0.08)] dark:bg-[rgba(38,38,38,0.62)]">
+    <div className="flex flex-1 flex-row gap-6 p-3 md:p-6 min-h-0">
+      {/* The docked index is a desktop affordance — you already chose a
+          record to get here, and at mobile widths it would leave the sheet
+          nothing to sit in. The back key still returns to the record list. */}
+      <div className="hidden md:flex w-[296px] flex-shrink-0 flex-col overflow-auto border border-sand-300 dark:border-ink-100/40 bg-[rgba(38,38,38,0.08)] dark:bg-[rgba(38,38,38,0.62)]">
         <div className="flex h-10 flex-shrink-0 items-center justify-between border-b border-sand-300 dark:border-ink-100/40 px-4">
           <span className="font-instrument text-[12px] font-bold uppercase tracking-[0.10em] text-sand-900 dark:text-ink-50">
             Disclosure Index
@@ -197,13 +202,19 @@ function ReadRecord({
       </div>
 
       <div className="flex flex-1 flex-col items-center overflow-hidden">
-        <div className="mb-4 flex flex-shrink-0 items-center gap-3">
+        {/* Six items don't fit a phone's width. It wraps, and the two purely
+            informational readouts (scan/DPI, the Light Table chip) drop
+            below md — the back key, file number and calibration are the
+            ones you actually need here. */}
+        <div className="mb-4 flex w-full flex-shrink-0 flex-wrap items-center justify-center gap-x-3 gap-y-2">
           <BackKey onClick={onBack} />
           <Readout fields={[record.fileNo]} tone="full" />
-          <span className="h-3 w-px bg-sand-300 dark:bg-ink-100/40" />
-          <Readout fields={[`SCAN ${record.scan}`, "600 DPI"]} />
+          <span className="hidden md:block h-3 w-px bg-sand-300 dark:bg-ink-100/40" />
+          <Readout fields={[`SCAN ${record.scan}`, "600 DPI"]} className="hidden md:inline" />
           <CalibrationReadout fidelity={record.fidelity} />
-          <Badge signal>Light Table</Badge>
+          <Badge signal className="hidden md:inline-flex">
+            Light Table
+          </Badge>
         </div>
         {/* The sheet scrolls here, in its own pane. `zoom` rather than
             `transform: scale` on purpose: a transform leaves the element's
@@ -211,7 +222,7 @@ function ReadRecord({
             unscaled height and most of it empty. zoom shrinks the box
             itself, so the scrollable area matches what you actually see. */}
         <div className="flex w-full flex-1 min-h-0 justify-center overflow-y-auto overflow-x-hidden">
-          <div style={{ zoom: 0.66 }}>
+          <div className="sheet-scale w-full md:w-auto">
             <DocumentSheet record={record} />
           </div>
         </div>

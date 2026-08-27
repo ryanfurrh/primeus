@@ -47,7 +47,7 @@ export function WorldClient({ frames }: { frames: WorldFrame[] }) {
         name="World"
         readout={`REEL 01 · ${String(frames.length).padStart(2, "0")} FRAMES`}
       />
-      <div className="m-6 flex flex-1 flex-col min-h-0 overflow-hidden border border-sand-400 dark:border-ink-100 bg-sand-50/90 dark:bg-ink-900/90">
+      <div className="m-3 md:m-6 flex flex-1 flex-col min-w-0 min-h-0 overflow-hidden border border-sand-400 dark:border-ink-100 bg-sand-50/90 dark:bg-ink-900/90">
         {/* Reel head. text-body-rgb isn't a token this repo imports as a CSS
             custom property (same reasoning as GridBackdrop/ArtifactData) —
             hardcoded to its real light/dark values: sand-700 105,95,82
@@ -71,22 +71,33 @@ export function WorldClient({ frames }: { frames: WorldFrame[] }) {
               backgroundRepeat: "no-repeat",
             }}
           />
-          <div className="flex items-center border-l border-sand-300 dark:border-ink-100/40 px-6">
-            <span className="font-mono text-[12px] tracking-[0.14em] text-neptune-600 dark:text-neptune-400">
+          {/* Decorative chrome — first thing to go when there isn't width,
+              rather than letting it push the frame past the viewport. */}
+          <div className="hidden sm:flex items-center border-l border-sand-300 dark:border-ink-100/40 px-6">
+            <span className="whitespace-nowrap font-mono text-[12px] tracking-[0.14em] text-neptune-600 dark:text-neptune-400">
               PRIMEUS.WORLD.VAULT_OS
             </span>
           </div>
         </div>
 
         {/* Breadcrumb */}
-        <div className="flex h-6 flex-shrink-0 items-center justify-between border-b border-sand-300 dark:border-ink-100/40 px-6">
-          <span className="font-mono text-[9px] tracking-[0.16em] text-neptune-600 dark:text-neptune-400">
+        {/* The path truncates rather than pushing the frame wide, and the
+            calibration readout drops below sm where there's no room for it
+            beside the path. */}
+        <div className="flex h-6 flex-shrink-0 items-center justify-between gap-3 border-b border-sand-300 dark:border-ink-100/40 px-3 md:px-6">
+          <span className="min-w-0 truncate font-mono text-[9px] tracking-[0.16em] text-neptune-600 dark:text-neptune-400">
             WORLD / {frame.folder} / {frame.title.toUpperCase()}
           </span>
-          <Readout fields={["PRIMEUS-VAULT", `CAL. REF ${frame.caps.words}W`, `MEAN ${mean.toFixed(3)}`]} />
+          <Readout
+            fields={["PRIMEUS-VAULT", `CAL. REF ${frame.caps.words}W`, `MEAN ${mean.toFixed(3)}`]}
+            className="hidden shrink-0 sm:inline"
+          />
         </div>
 
-        <div className="flex flex-1 flex-row min-h-0">
+        {/* Three side-by-side columns need ~700px to be readable, so below
+            md they stack and each scrolls in turn instead of being squeezed
+            to nothing. */}
+        <div className="flex flex-1 flex-col md:flex-row min-h-0 overflow-y-auto md:overflow-hidden">
           <FrameIndex frames={frames} folders={folders} current={frame.no} onPick={setNo} />
           <FrameBody frame={frame} />
           <CrossReference frame={frame} frames={frames} onPick={setNo} />
@@ -108,7 +119,7 @@ function FrameIndex({
   onPick: (no: string) => void
 }) {
   return (
-    <div className="flex w-[232px] flex-shrink-0 flex-col border-r border-sand-300 dark:border-ink-100/40">
+    <div className="flex w-full md:w-[232px] max-h-56 md:max-h-none flex-shrink-0 flex-col border-b md:border-b-0 md:border-r border-sand-300 dark:border-ink-100/40">
       <div className="flex items-center justify-between border-b border-sand-300 dark:border-ink-100/40 px-3 pb-2 pt-2.5">
         <span className="font-mono text-[9px] tracking-[0.18em] text-neptune-600 dark:text-neptune-400">
           FRAME INDEX
@@ -174,19 +185,23 @@ function FrameIndex({
 function FrameBody({ frame }: { frame: WorldFrame }) {
   return (
     <div className="relative flex min-w-0 flex-1 flex-col">
-      <div className="flex flex-shrink-0 items-end justify-between gap-6 border-b border-sand-300 dark:border-ink-100/40 px-10 pb-3.5 pt-[22px]">
+      {/* Stacks below md — side by side the readout landed on top of the
+          title once the column narrowed. */}
+      <div className="flex flex-shrink-0 flex-col md:flex-row items-start md:items-end justify-between gap-2 md:gap-6 border-b border-sand-300 dark:border-ink-100/40 px-5 md:px-10 pb-3.5 pt-[22px]">
         <div className="flex min-w-0 flex-col gap-1.5">
           <span className="font-mono text-[9px] tracking-[0.2em] text-neptune-600 dark:text-neptune-400">
             WORLD / {frame.folder}
           </span>
-          <h1 className="m-0 font-prose text-[30px] font-bold leading-[1.05] text-sand-900 dark:text-ink-50">
+          <h1 className="m-0 font-prose text-[22px] md:text-[30px] font-bold leading-[1.05] text-sand-900 dark:text-ink-50">
             {frame.title}
           </h1>
         </div>
         <CalibrationReadout fidelity={frame.fidelity} className="flex-shrink-0" />
       </div>
 
-      <div className="flex-1 min-h-0 overflow-auto px-10 pb-10 pt-8">
+      {/* Stacked on mobile the parent scrolls, so this flows at natural
+          height; from md it becomes its own scroll pane again. */}
+      <div className="flex-1 md:min-h-0 md:overflow-auto px-5 md:px-10 pb-10 pt-8">
         <div className="flex max-w-[600px] flex-col">
           {frame.empty ? (
             <div className="flex flex-col gap-2 border border-alert p-4 shadow-[inset_2px_0_0_0_theme(colors.alert)]">
@@ -333,7 +348,7 @@ function CrossReference({
   }
 
   return (
-    <div className="flex w-[252px] flex-shrink-0 flex-col border-l border-sand-300 dark:border-ink-100/40">
+    <div className="flex w-full md:w-[252px] flex-shrink-0 flex-col border-t md:border-t-0 md:border-l border-sand-300 dark:border-ink-100/40">
       <div className="border-b border-sand-300 dark:border-ink-100/40 px-3 pb-2 pt-2.5">
         <span className="font-mono text-[9px] tracking-[0.18em] text-neptune-600 dark:text-neptune-400">
           CROSS-REFERENCE

@@ -57,7 +57,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   </p>
                 </div>
 
-                <main className="flex-1 overflow-y-auto overflow-x-hidden px-6 md:px-[72px]">
+                {/* Symmetric only from md up, where the gutter equals the
+                    collapsed rail and content centres in the viewport. Below
+                    that there isn't width to spare for a matching right
+                    gutter, so the page just clears the 72px rail on the left
+                    (plus a hair) and takes a small inset on the right. */}
+                <main className="flex-1 overflow-y-auto overflow-x-hidden pl-[84px] pr-4 md:px-[72px]">
                   {children}
                   <Analytics />
                 </main>

@@ -23,7 +23,14 @@ const field: CSSProperties = { letterSpacing: "0.1em", color: "#5A544A" }
 export function DocumentSheet({ record }: { record: DisclosureFull }) {
   return (
     <div
-      className={cn(courierPrime.className, "relative box-border w-[604px] px-[60px] pb-16 pt-14")}
+      /* Fixed 604px paper from md up. Below that it reflows to the pane
+         width instead — scaling a 604px sheet down to a phone would put the
+         body text near 5px, so the page gives up its exact proportions to
+         stay readable. */
+      className={cn(
+        courierPrime.className,
+        "relative box-border w-full md:w-[604px] px-6 md:px-[60px] pb-16 pt-14"
+      )}
       style={{ background: "#E6E1D3", color: "#1C1A16" }}
     >
       <div
