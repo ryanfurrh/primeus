@@ -1,4 +1,4 @@
-// app/documentation/[slug]/page.tsx
+// app/archive/[...slug]/page.tsx
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { getAllDisclosuresWithContent } from "@/lib/getAllDisclosures"
@@ -8,7 +8,7 @@ import { Readout } from "@/components/data/Readout"
 import { ArrowLeft } from "@/public/icons"
 
 /* Standalone deep link into a single disclosure — not part of the internal
-   three-move flow (nothing in DocumentationClient navigates here), which
+   three-move flow (nothing in ArchiveClient navigates here), which
    stays true to the site's "do not collapse the three moves into
    index-plus-detail" rule. This route exists for direct/bookmarked access
    to one record, same as it did before the redesign, just reading from
@@ -19,7 +19,7 @@ export async function generateStaticParams() {
 }
 
 export const metadata = {
-  title: "Documentation",
+  title: "Archive",
   description: "",
 }
 
@@ -34,7 +34,7 @@ export default function DisclosurePage({ params }: { params: { slug: string[] } 
     <div className="flex w-full flex-col items-center px-4 py-8">
       <div className="mb-4 flex w-full max-w-[604px] items-center gap-3">
         <Link
-          href="/documentation"
+          href="/archive"
           className="flex h-[22px] w-[22px] flex-shrink-0 items-center justify-center border border-sand-400/60 dark:border-pale-100/35 text-sand-500 dark:text-pale-100/50"
         >
           <ArrowLeft className="h-3 w-3" />

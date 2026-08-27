@@ -1,4 +1,4 @@
-// app/documentation/components/SourceKey.tsx
+// app/archive/components/SourceKey.tsx
 "use client"
 
 import { useState, ReactNode } from "react"

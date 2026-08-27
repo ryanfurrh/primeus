@@ -1,4 +1,4 @@
-// app/documentation/DocumentationClient.tsx
+// app/archive/ArchiveClient.tsx
 "use client"
 
 import { useState, ReactNode } from "react"
@@ -7,6 +7,7 @@ import { Readout } from "@/components/data/Readout"
 import { Badge } from "@/components/data/Badge"
 import { CalibrationReadout } from "@/components/data/CalibrationReadout"
 import { GridBackdrop } from "@/components/GridBackdrop"
+import { useSidebar } from "@/components/layout/SidebarContext"
 import { SourceKey } from "./components/SourceKey"
 import { RecordRow } from "./components/RecordRow"
 import { BackKey } from "./components/BackKey"
@@ -31,11 +32,21 @@ const SOURCE_SUB: Record<string, string> = {
    adapted to real vault/disclosures content: real sources (folder names,
    not fictional institutions), real record counts, no fabricated
    "SEALED"/"PARTIAL" status since nothing here is actually incomplete. */
-export function DocumentationClient({ records }: { records: DisclosureFull[] }) {
+export function ArchiveClient({ records }: { records: DisclosureFull[] }) {
   const groups = groupDisclosures(records)
+  const { setCollapsed } = useSidebar()
   const [group, setGroup] = useState<string | null>(null)
   const [sel, setSel] = useState<string | null>(null)
   const record = records.find((r) => r.slug === sel) ?? null
+
+  /* Opening a record docks the index and puts a sheet on the light table —
+     the widest move in the archive — so the rail gets out of the way. Only
+     on open: going back doesn't re-expand it, since by then it's the
+     reader's own choice how much room they want. */
+  const openRecord = (slug: string) => {
+    setSel(slug)
+    setCollapsed(true)
+  }
 
   const years = records.map((r) => (r.date ? r.date.slice(0, 4) : null)).filter(Boolean) as string[]
   const yearRange = years.length ? `${Math.min(...years.map(Number))}—${Math.max(...years.map(Number))}` : null
@@ -56,14 +67,14 @@ export function DocumentationClient({ records }: { records: DisclosureFull[] }) 
             groups={groups}
             group={group}
             onBack={() => setGroup(null)}
-            onPick={setSel}
+            onPick={openRecord}
           />
         ) : (
           <ReadRecord
             groups={groups}
             all={records}
             record={record}
-            onPick={setSel}
+            onPick={openRecord}
             onBack={() => setSel(null)}
           />
         )}

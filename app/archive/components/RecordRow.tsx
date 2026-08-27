@@ -1,4 +1,4 @@
-// app/documentation/components/RecordRow.tsx
+// app/archive/components/RecordRow.tsx
 "use client"
 
 import { useState } from "react"

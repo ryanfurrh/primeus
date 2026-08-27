@@ -1,4 +1,4 @@
-// app/documentation/components/DocumentSheet.tsx
+// app/archive/components/DocumentSheet.tsx
 import Image from "next/image"
 import type { CSSProperties } from "react"
 import { courierPrime } from "@/app/fonts"

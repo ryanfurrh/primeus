@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react"
 import { ArtifactProvider } from "./artifacts/components/ArtifactContext"
 import { ThemeProvider } from "../components/theme-provider"
 import { Sidebar } from "@/components/layout/Sidebar"
+import { SidebarProvider } from "@/components/layout/SidebarContext"
 import { fontVars } from "@/app/fonts"
 
 export const metadata = {
@@ -31,21 +32,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             disableTransitionOnChange
             value={{ light: "light", dark: "dark" }}
           >
-            <Sidebar />
+            {/* Wraps both the rail and the page area so a surface can reach
+                the rail's collapsed state (the archive collapses it when a
+                record opens onto the light table). */}
+            <SidebarProvider>
+              <Sidebar />
 
-            {/* The rail is fixed-position (out of flow), so this fills the
-                whole viewport and every surface centres in it. The gutter is
-                the collapsed rail width on BOTH sides — symmetric, so content
-                is centred in the viewport rather than pushed right by the
-                rail. Keep this in step with Sidebar's collapsed width (w-24).
-                Surfaces that want the full width (Artifacts' 3D stage) opt
-                out in their own layout. */}
-            <div className="flex flex-col flex-1 h-full overflow-hidden">
-              <main className="flex-1 overflow-y-auto overflow-x-hidden px-6 md:px-24">
-                {children}
-                <Analytics />
-              </main>
-            </div>
+              {/* The rail is fixed-position (out of flow), so this fills the
+                  whole viewport and every surface centres in it. The gutter is
+                  the collapsed rail width on BOTH sides — symmetric, so content
+                  is centred in the viewport rather than pushed right by the
+                  rail. Keep this in step with Sidebar's collapsed width (w-24).
+                  Surfaces that want the full width (Artifacts' 3D stage) opt
+                  out in their own layout. */}
+              <div className="flex flex-col flex-1 h-full overflow-hidden">
+                <main className="flex-1 overflow-y-auto overflow-x-hidden px-6 md:px-24">
+                  {children}
+                  <Analytics />
+                </main>
+              </div>
+            </SidebarProvider>
           </ThemeProvider>
         </body>
       </ArtifactProvider>

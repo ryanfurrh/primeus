@@ -14,7 +14,7 @@ import type { WorldFrame } from "@/lib/getWorldFrames"
    system's WorldScreen.jsx (FrameIndex / FrameBody / CrossReference /
    Absent) against real vault/world content instead of the kit's embedded
    vault.js array — same parser (lib/parseVaultPage.ts), same Calibration
-   mechanic already built for Documentation (lib/calibration.ts,
+   mechanic already built for the Archive (lib/calibration.ts,
    components/data/CalibratedText.tsx), real linksOut/citedBy resolved from
    actual [[wikilinks]] in the vault, not fabricated. */
 export function WorldClient({ frames }: { frames: WorldFrame[] }) {
@@ -26,7 +26,11 @@ export function WorldClient({ frames }: { frames: WorldFrame[] }) {
   if (!frame) return null
 
   return (
-    <div className="flex flex-1 flex-col min-h-0">
+    /* h-full, not flex-1 — <main> isn't a flex container, so flex-1 was inert
+       here and the frame grew to its content, scrolling the whole page. With
+       a definite height the frame fits the window (less the m-6 padding) and
+       the three columns inside carry their own overflow-auto. */
+    <div className="flex h-full flex-col min-h-0">
       <PageHeader
         icon={<WorldIcon className="h-4 w-4" />}
         name="World"

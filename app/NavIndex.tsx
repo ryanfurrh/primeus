@@ -38,8 +38,8 @@ export const NavIndex: { items: Item[] }[] = [
   {
     items: [
       {
-        name: "documentation_",
-        slug: "documentation",
+        name: "archive_",
+        slug: "archive",
         description: "string",
         icon: <DocumentationIcon className="w-full h-auto" />,
       },

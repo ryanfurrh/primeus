@@ -1,4 +1,4 @@
-// app/documentation/components/BackKey.tsx
+// app/archive/components/BackKey.tsx
 "use client"
 
 import { useState } from "react"

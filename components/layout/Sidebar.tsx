@@ -7,12 +7,14 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { ArrowLeft, PrimaeLogo } from "@/public/icons"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import type { ScrambleInHandle } from "@/fancy/components/text/scramble-in"
 import Version from "@/app/components/Version"
+import { useSidebar } from "./SidebarContext"
 
 export function Sidebar() {
-  const [collapsed, setCollapsed] = useState(false)
+  // Shared, not local — a page can collapse the rail (see SidebarContext).
+  const { collapsed, setCollapsed } = useSidebar()
 
   // Flatten the list of items
   const items = NavIndex.flatMap((section) => section.items)
@@ -57,7 +59,8 @@ export function Sidebar() {
         {/* Logo */}
         <div
           className={cn(
-            "relative z-0 flex pt-6 pb-2 transition-all duration-500 ease-in-out",
+            // pb-6 (was pb-2) lifts the wordmark clear of the chrome frame.
+            "relative z-0 flex pt-6 pb-6 transition-all duration-500 ease-in-out",
             collapsed ? "justify-center pl-0" : "pl-5"
           )}
         >
