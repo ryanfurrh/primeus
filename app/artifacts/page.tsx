@@ -23,7 +23,7 @@ const ArtifactsPage = () => {
     // -mx cancels the root layout's gutter so the 3D stage runs edge-to-edge
     // under the floating rail. flex-1 (not w-full) so the negative margins
     // expand it to exactly the viewport width instead of overflowing.
-    <div className="relative flex flex-1 h-full min-h-[480px] overflow-hidden -mx-6 md:-mx-24">
+    <div className="relative flex flex-1 h-full min-h-[480px] overflow-hidden -mx-6 md:-mx-[72px]">
       {/* wash-rgb isn't a token this repo imports (Stage 1 translated the kit's
           CSS-custom-property layer to Tailwind classes) — hardcoded to the
           real light/dark values from tokens/semantic.css instead of a
@@ -48,7 +48,7 @@ const ArtifactsPage = () => {
           ArtifactSelector is the page's single selector now — it took over
           this button position from ModelSelect and the artifact-switching job
           from the dropdown that used to live in WindowHeader. */}
-      <div className="absolute z-20 top-20 right-6 bottom-6 flex w-64 flex-col gap-3 pointer-events-none md:right-24 md:w-72">
+      <div className="absolute z-20 top-20 right-6 bottom-6 flex w-64 flex-col gap-3 pointer-events-none md:right-[72px] md:w-72">
         <div className="self-end pointer-events-auto">
           <ArtifactSelector />
         </div>

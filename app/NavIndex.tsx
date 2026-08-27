@@ -18,7 +18,7 @@ export const NavIndex: { items: Item[] }[] = [
   {
     items: [
       {
-        name: "world_",
+        name: "World_",
         slug: "world",
         description: "string",
         icon: <WorldIcon className="w-full h-auto" />,
@@ -28,7 +28,7 @@ export const NavIndex: { items: Item[] }[] = [
   {
     items: [
       {
-        name: "artifacts_",
+        name: "Artifacts_",
         slug: "artifacts",
         description: "string",
         icon: <ArtifactDatabaseIcon className="w-full h-auto" />,
@@ -38,7 +38,7 @@ export const NavIndex: { items: Item[] }[] = [
   {
     items: [
       {
-        name: "archive_",
+        name: "Archive_",
         slug: "archive",
         description: "string",
         icon: <DocumentationIcon className="w-full h-auto" />,

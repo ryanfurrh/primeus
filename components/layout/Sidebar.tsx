@@ -44,7 +44,7 @@ export function Sidebar() {
         // the rail's contents into the lower third. Vertically centred now
         // (see justify-center below), which is what the kit's GlobalNav does.
         "fixed inset-y-0 left-0 z-30 flex transition-all duration-500 ease-in-out",
-        collapsed ? "w-24" : "w-60"
+        collapsed ? "w-18" : "w-52"
       )}
     >
       <div
@@ -53,7 +53,7 @@ export function Sidebar() {
           // the chrome frame (the bordered nav box) only, so the wordmark and
           // version chip sit directly on the page.
           "flex flex-col justify-center gap-5 w-full h-full text-foreground transition-all duration-500 ease-in-out overflow-visible",
-          collapsed ? "w-24" : "md:w-60"
+          collapsed ? "w-18" : "md:w-52"
         )}
       >
         {/* Logo */}
@@ -69,23 +69,31 @@ export function Sidebar() {
             className="inline-flex justify-start h-6 gap-2 text-[22px] font-bold tracking-[-0.02em] font-instrument"
           >
             <PrimaeLogo className="flex-shrink-0 text-neptune-600" />
+            {/* max-width, not w-full -> w-0. A percentage width resolving
+                against a rail that is itself animating is what made the
+                wordmark jerk sideways mid-collapse; a fixed px max-width
+                interpolates linearly and stays put. */}
             <div
               className={cn(
-                "transition-all duration-500 ease-in-out",
-                collapsed ? "opacity-0 w-0 truncate" : "opacity-100 w-full"
+                "overflow-hidden whitespace-nowrap transition-all duration-500 ease-in-out",
+                collapsed ? "max-w-0 opacity-0" : "max-w-[140px] opacity-100"
               )}
             >
               Primeūs
             </div>
           </Link>
+          {/* No box around it any more — just the glyph. And it mirrors
+              rather than rotating: scale-x flips the arrow in place, where
+              -rotate-180 swung it through a half-turn. */}
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className="absolute right-0 flex items-center justify-center w-[18px] h-[18px] border border-ink-400/40 dark:border-pale-100/30 transition-all text-muted-foreground hover:text-foreground"
+            className="absolute right-0 flex items-center justify-center w-[18px] h-[18px] transition-all text-muted-foreground hover:text-foreground"
           >
             <ArrowLeft
-              className={`w-3 h-3 transform transition-all duration-500 ${
-                collapsed ? "-rotate-180" : ""
-              }`}
+              className={cn(
+                "w-3 h-3 transform transition-transform duration-500 ease-in-out",
+                collapsed ? "scale-x-[-1]" : "scale-x-100"
+              )}
             />
           </button>
         </div>
@@ -99,7 +107,7 @@ export function Sidebar() {
             // This is the chrome frame, so it carries the rail's translucent
             // ground (replacing the dead bg-card, which resolved to nothing).
             "flex flex-col justify-between bg-background/60 backdrop-blur-[6px] transition-all duration-500 ease-in-out",
-            collapsed ? "w-24" : "md:w-60"
+            collapsed ? "w-18" : "md:w-52"
           )}
         >
           <div className="flex w-full h-4 border-t border-r border-tan" />
@@ -127,6 +135,11 @@ export function Sidebar() {
           </div>
           <div className="flex w-full h-4 border-b border-r border-tan" />
         </div>
+      </div>
+
+      {/* Pinned to the viewport's bottom-left rather than riding the bottom
+          of the centred stack, so it stays put as the rail collapses. */}
+      <div className="fixed bottom-4 left-4 z-30">
         <Version />
       </div>
     </aside>

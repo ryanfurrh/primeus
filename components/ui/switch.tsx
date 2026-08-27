@@ -19,12 +19,12 @@ const Switch = React.forwardRef<React.ElementRef<typeof SwitchPrimitives.Root>, 
       {...props}
       ref={ref}
     >
+      {/* Always horizontal now — the vertical (collapsed) variant is gone,
+          and the checked travel is retuned for the narrower w-10 track. */}
       <SwitchPrimitives.Thumb
         className={cn(
-          "pointer-events-none block bg-tan ring-0 transition-all duration-300 ease-in-out",
-          collapsed
-            ? "h-3 w-1 translate-x-[3px] data-[state=checked]:-translate-y-3.5 data-[state=unchecked]:translate-y-3.5"
-            : "h-1 w-3 data-[state=checked]:translate-x-[30px] data-[state=unchecked]:translate-x-1"
+          "pointer-events-none block h-1 w-3 bg-tan ring-0 transition-all duration-300 ease-in-out",
+          "data-[state=checked]:translate-x-[24px] data-[state=unchecked]:translate-x-1"
         )}
       />
     </SwitchPrimitives.Root>
