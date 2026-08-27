@@ -2,7 +2,7 @@
    wraps app/artifacts/[model], so that route lost the gutter too and its
    content ended up underneath the floating rail. Only the stage page runs
    edge-to-edge, so the cancel now sits on app/artifacts/page.tsx itself. */
-export default function ArtifactsLayout({ children }) {
+export default function ArtifactsLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-full flex-col">
       <main className="flex w-full h-full">{children}</main>

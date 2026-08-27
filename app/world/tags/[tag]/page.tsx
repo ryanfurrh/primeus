@@ -4,7 +4,7 @@ export default function TagPage({ params }: { params: { tag: string } }) {
   const tag = params.tag
   const allNotes = getAllNotes()
   const tagged = allNotes.filter((note) =>
-    note.tags?.map((t) => t.toLowerCase()).includes(tag.toLowerCase())
+    note.tags?.map((t: string) => t.toLowerCase()).includes(tag.toLowerCase())
   )
 
   return (

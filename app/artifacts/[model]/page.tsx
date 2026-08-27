@@ -6,15 +6,17 @@ import ViewPort from "../components/ViewPort"
 import { useEffect, useState } from "react"
 import ModelSelect from "../components/ModelSelect"
 
+type ModelData = (typeof modelsData)[number]
+
 export default function ModelPage() {
   const { model } = useParams()
-  const [modelData, setModelData] = useState(null)
+  const [modelData, setModelData] = useState<ModelData | null>(null)
 
   useEffect(() => {
     console.log("Model from useParams:", model)
     const selectedModel = modelsData.find((m) => m.file === model)
     console.log("Selected model data:", selectedModel)
-    setModelData(selectedModel)
+    setModelData(selectedModel ?? null)
   }, [model])
 
   if (!modelData) {

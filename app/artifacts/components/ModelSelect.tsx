@@ -15,12 +15,12 @@ export default function ModelSelect() {
   useEffect(() => {
     // Extract the model name from the current pathname (e.g., /artifacts/Visor)
     const currentModel = pathname.split("/").pop()
-    if (modelsData.some((model) => model.file === currentModel)) {
+    if (currentModel && modelsData.some((model) => model.file === currentModel)) {
       setSelectedModel(currentModel)
     }
   }, [pathname])
 
-  const handleSelect = (value) => {
+  const handleSelect = (value: string) => {
     setSelectedModel(value)
     router.push(`/artifacts/${value}`)
   }
