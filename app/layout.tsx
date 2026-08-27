@@ -1,7 +1,5 @@
 import "../styles/globals.css"
 import { Analytics } from "@vercel/analytics/react"
-import { Footer } from "@/app/components/Footer"
-import Version from "@/app/components/Version"
 import { ArtifactProvider } from "./artifacts/components/ArtifactContext"
 import { ThemeProvider } from "../components/theme-provider"
 import { Sidebar } from "@/components/layout/Sidebar"
@@ -46,7 +44,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {children}
                 <Analytics />
               </main>
-              <Footer />
             </div>
           </ThemeProvider>
         </body>

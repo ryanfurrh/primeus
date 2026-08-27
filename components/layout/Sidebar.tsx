@@ -38,7 +38,10 @@ export function Sidebar() {
   return (
     <aside
       className={cn(
-        "fixed inset-y-0 left-0 z-30 flex pt-96 transition-all duration-500 ease-in-out",
+        // No pt-96 any more — that arbitrary 384px top padding is what pushed
+        // the rail's contents into the lower third. Vertically centred now
+        // (see justify-center below), which is what the kit's GlobalNav does.
+        "fixed inset-y-0 left-0 z-30 flex transition-all duration-500 ease-in-out",
         collapsed ? "w-[110px]" : "w-[280px]"
       )}
     >
@@ -47,7 +50,7 @@ export function Sidebar() {
           // Translucent + blurred so the page reads through the rail. bg-card
           // on the nav box below is a dead class (no `card` colour in
           // tailwind.config.js), so this is the rail's only background layer.
-          "flex flex-col justify-between w-full h-full bg-background/60 backdrop-blur-[6px] text-foreground transition-all duration-500 ease-in-out overflow-visible",
+          "flex flex-col justify-center gap-5 w-full h-full bg-background/60 backdrop-blur-[6px] text-foreground transition-all duration-500 ease-in-out overflow-visible",
           collapsed ? "w-[110px]" : "md:w-[280px]"
         )}
       >
@@ -64,7 +67,7 @@ export function Sidebar() {
                 collapsed ? "opacity-0 w-0 truncate" : "opacity-100 w-full"
               )}
             >
-              Primordeūs
+              Primeūs
             </div>
           </Link>
           <button
@@ -82,12 +85,15 @@ export function Sidebar() {
         {/* Nav Box */}
         <div
           className={cn(
-            "flex flex-col justify-between flex-1 h-full bg-card transition-all duration-500 ease-in-out",
+            // No flex-1/h-full — those made the nav box fill the rail, which
+            // would defeat the parent's justify-center. Content-height now, so
+            // the whole stack centres as one block.
+            "flex flex-col justify-between bg-card transition-all duration-500 ease-in-out",
             collapsed ? "w-[110px]" : "md:w-[280px]"
           )}
         >
           <div className="flex w-full h-4 border-t border-r border-tan" />
-          <div className="z-10 flex flex-col h-full gap-1 py-4">
+          <div className="z-10 flex flex-col gap-1 py-4">
             <nav className="flex flex-col gap-2">
               {items.map((item, index) => (
                 <SidebarItem

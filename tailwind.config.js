@@ -32,6 +32,11 @@ module.exports = {
     "./components/**/*.{js,ts,tsx}",
     "./app/**/*.{js,ts,tsx}",
     "./src/**/*.{js,ts,tsx}",
+    // ./fancy was missing, so Tailwind never saw the `sr-only` in
+    // scramble-in/scramble-hover and never generated that class — which is
+    // why every nav label rendered twice ("world_world_"): the
+    // screen-reader-only span was painting alongside the visible one.
+    "./fancy/**/*.{js,ts,tsx}",
     "./App.jsx",
   ],
   theme: {
