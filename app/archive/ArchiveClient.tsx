@@ -251,8 +251,13 @@ function ReadRecord({
             layout box at full size, so the scroll range would be the
             unscaled height and most of it empty. zoom shrinks the box
             itself, so the scrollable area matches what you actually see. */}
+        {/* items-start matters for more than looks: as a flex container this
+            defaults to stretch, which sized the sheet wrapper to the pane's
+            visible height rather than the sheet's own. The loupe measures
+            that wrapper, so every reading was taken against a box ~2.2x too
+            short and drifted further the more you scrolled. */}
         <div
-          className="flex w-full flex-1 min-h-0 justify-center overflow-y-auto overflow-x-hidden md:cursor-crosshair"
+          className="flex w-full flex-1 min-h-0 items-start justify-center overflow-y-auto overflow-x-hidden md:cursor-crosshair"
           onMouseMove={track}
           onMouseLeave={() => setReading(null)}
         >
