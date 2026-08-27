@@ -93,7 +93,19 @@ function Block({ block, fidelity }: { block: DisclosureBlock; fidelity: number }
     case "image":
       return (
         <div className="my-4">
-          <Image src={block.src} alt={block.alt} width={480} height={320} className="h-auto w-full max-w-[480px]" />
+          {/* Printed as ink rather than reproduced in its own colours. The
+              artwork is flux teal (#1BE4B4), which sits far too close to the
+              paper's value to read; desaturating and darkening puts it in the
+              sheet's own ink range, which is also what a scanned plate would
+              actually look like. */}
+          <Image
+            src={block.src}
+            alt={block.alt}
+            width={480}
+            height={320}
+            className="h-auto w-full max-w-[480px]"
+            style={{ filter: "grayscale(1) brightness(0.42) contrast(1.15)" }}
+          />
         </div>
       )
     case "table":
@@ -116,7 +128,7 @@ function Block({ block, fidelity }: { block: DisclosureBlock; fidelity: number }
       return (
         <ol className="my-3 flex flex-col gap-1 pl-5" style={{ listStyleType: block.ordered ? "decimal" : "disc" }}>
           {block.items.map((item, ii) => (
-            <CalibratedText key={ii} tag="li" fidelity={fidelity}>
+            <CalibratedText key={ii} tag="li" fidelity={fidelity} inheritColor>
               {item}
             </CalibratedText>
           ))}
@@ -124,7 +136,7 @@ function Block({ block, fidelity }: { block: DisclosureBlock; fidelity: number }
       )
     case "p":
       return (
-        <CalibratedText tag="p" fidelity={fidelity} className="mb-4">
+        <CalibratedText tag="p" fidelity={fidelity} inheritColor className="mb-4">
           {block.text}
         </CalibratedText>
       )

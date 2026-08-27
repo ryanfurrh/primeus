@@ -16,6 +16,11 @@ interface CalibratedTextProps {
   fidelity?: number
   prose?: boolean
   tag?: ElementType
+  /* Drop the theme text colours and inherit from the parent instead. For
+     surfaces that carry their own fixed palette rather than reflowing with
+     light/dark — the document sheet is fixed paper, so the dark-mode
+     `pale-100` here rendered warm-light text on a light-cream page. */
+  inheritColor?: boolean
   className?: string
   style?: CSSProperties
 }
@@ -26,7 +31,15 @@ interface CalibratedTextProps {
    structure never decays. Ported from the design system's
    components/data/CalibratedText.jsx — same algorithm, Tailwind cal10-100
    classes (from Stage 1's tailwind.config.js) instead of --font-cal-* vars. */
-export function CalibratedText({ children, fidelity = 1, prose = true, tag = "p", className, style }: CalibratedTextProps) {
+export function CalibratedText({
+  children,
+  fidelity = 1,
+  prose = true,
+  tag = "p",
+  inheritColor = false,
+  className,
+  style,
+}: CalibratedTextProps) {
   const text = typeof children === "string" ? children : String(children ?? "")
   const terms: [number, number][] = []
   let removed = 0
@@ -66,7 +79,8 @@ export function CalibratedText({ children, fidelity = 1, prose = true, tag = "p"
     <Tag
       className={cn(
         CAL_FONT_CLASS[baseCut],
-        "m-0 text-[16px] leading-[24px] text-sand-700 dark:text-pale-100",
+        "m-0 text-[16px] leading-[24px]",
+        inheritColor ? "text-inherit" : "text-sand-700 dark:text-pale-100",
         className
       )}
       style={style}
@@ -74,7 +88,13 @@ export function CalibratedText({ children, fidelity = 1, prose = true, tag = "p"
       {runs.map((r, i) => (
         <span
           key={i}
-          className={cn(CAL_FONT_CLASS[r.cut], r.notated && "text-sand-900 dark:text-ink-50")}
+          className={cn(
+            CAL_FONT_CLASS[r.cut],
+            // Notated terms brighten against the page; on a fixed-palette
+            // surface that would fight the parent's colour, so lean on
+            // weight instead of a theme colour.
+            r.notated && (inheritColor ? "font-semibold" : "text-sand-900 dark:text-ink-50")
+          )}
         >
           {r.text}
         </span>
