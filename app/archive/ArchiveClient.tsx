@@ -1,7 +1,7 @@
 // app/archive/ArchiveClient.tsx
 "use client"
 
-import { useState, ReactNode } from "react"
+import { useMemo, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode } from "react"
 import { PageHeader } from "@/components/PageHeader"
 import { Readout } from "@/components/data/Readout"
 import { Badge } from "@/components/data/Badge"
@@ -12,6 +12,7 @@ import { SourceKey } from "./components/SourceKey"
 import { RecordRow } from "./components/RecordRow"
 import { BackKey } from "./components/BackKey"
 import { DocumentSheet } from "./components/DocumentSheet"
+import { SheetLoupe, type LoupeReading } from "./components/SheetLoupe"
 import { groupDisclosures, type DisclosureFull, type DisclosureGroup } from "@/lib/disclosures"
 import { ArtifactDatabaseIcon, FluxIcon, DocumentationIcon } from "@/public/icons"
 
@@ -177,6 +178,35 @@ function ReadRecord({
   onPick: (slug: string) => void
   onBack: () => void
 }) {
+  const sheetRef = useRef<HTMLDivElement>(null)
+  const [reading, setReading] = useState<LoupeReading | null>(null)
+
+  /* One copy of the sheet, built once per record, handed to the loupe. Left
+     inline it would rebuild on every mousemove and re-run CalibratedText's
+     per-glyph pass; a stable element lets React skip it entirely while only
+     the loupe's offsets change. */
+  const magnified = useMemo(() => <DocumentSheet record={record} />, [record])
+
+  const track = (e: ReactMouseEvent<HTMLDivElement>) => {
+    const el = sheetRef.current
+    if (!el) return
+    const r = el.getBoundingClientRect()
+    const x = e.clientX - r.left
+    const y = e.clientY - r.top
+    if (x < 0 || y < 0 || x > r.width || y > r.height) {
+      setReading(null)
+      return
+    }
+    setReading({
+      clientX: e.clientX,
+      clientY: e.clientY,
+      fx: x / r.width,
+      fy: y / r.height,
+      rectW: r.width,
+      rectH: r.height,
+    })
+  }
+
   return (
     <div className="flex flex-1 flex-row gap-6 p-3 md:p-6 min-h-0">
       {/* The docked index is a desktop affordance — you already chose a
@@ -221,12 +251,18 @@ function ReadRecord({
             layout box at full size, so the scroll range would be the
             unscaled height and most of it empty. zoom shrinks the box
             itself, so the scrollable area matches what you actually see. */}
-        <div className="flex w-full flex-1 min-h-0 justify-center overflow-y-auto overflow-x-hidden">
-          <div className="sheet-scale w-full md:w-auto">
+        <div
+          className="flex w-full flex-1 min-h-0 justify-center overflow-y-auto overflow-x-hidden md:cursor-crosshair"
+          onMouseMove={track}
+          onMouseLeave={() => setReading(null)}
+        >
+          <div ref={sheetRef} className="sheet-scale w-full md:w-auto">
             <DocumentSheet record={record} />
           </div>
         </div>
       </div>
+
+      {reading ? <SheetLoupe reading={reading} sheet={magnified} /> : null}
     </div>
   )
 }
