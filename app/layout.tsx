@@ -46,6 +46,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   Surfaces that want the full width (Artifacts' 3D stage) opt
                   out in their own layout. */}
               <div className="flex flex-col flex-1 h-full overflow-hidden">
+                {/* Mobile-only advisory. In flow (not fixed) so it pushes the
+                    surface down rather than sitting on top of it, and
+                    relative z-40 so it clears the fixed rail at z-30 instead
+                    of disappearing behind it. Below md the rail overlaps the
+                    page anyway — that's the caveat this note is about. */}
+                <div className="relative z-40 flex-shrink-0 border-b border-sand-300 bg-sand-100 px-6 py-2 text-center md:hidden dark:border-ink-100/40 dark:bg-ink-800">
+                  <p className="m-0 font-mono text-[11px] leading-4 tracking-[0.04em] text-neptune-600 dark:text-neptune-400">
+                    Work in progress — best viewed on desktop for now.
+                  </p>
+                </div>
+
                 <main className="flex-1 overflow-y-auto overflow-x-hidden px-6 md:px-[72px]">
                   {children}
                   <Analytics />
