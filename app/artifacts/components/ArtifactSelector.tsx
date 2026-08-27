@@ -6,11 +6,14 @@ import { useArtifact } from "./ArtifactContext"
 import { ArtifactIndex } from "./ArtifactIndex"
 import { ArrowY } from "@/public/icons"
 
-/* WindowHeader's selector — real, wired to ArtifactContext. Replaces a
-   reference to a component named ArtifactSelector that never existed in the
-   repo (a pre-existing TS2307 in the Stage 1 baseline). Modeled on
-   ModelSelect.tsx's existing Radix pattern, but switches ArtifactContext's
-   local selection state instead of navigating. */
+/* The artifact viewport's single selector — it loads an artifact into the
+   stage via ArtifactContext. This used to sit inside WindowHeader as a small
+   in-title-bar dropdown alongside a separate "Select a model" button; it now
+   takes that button's position and is the only selector on the page.
+
+   Not the same thing as ModelSelect, which is still used by
+   app/artifacts/[model]/page.tsx and genuinely navigates between per-model
+   detail routes — that one is left alone. */
 export function ArtifactSelector() {
   const { selectedArtifact, setSelectedArtifact } = useArtifact()
 
@@ -18,19 +21,23 @@ export function ArtifactSelector() {
     <Select.Root value={selectedArtifact} onValueChange={setSelectedArtifact}>
       <Select.Trigger
         aria-label="Artifact"
-        className="flex flex-row items-center justify-between gap-2 px-3 py-1 font-mono text-[12px] text-pale-100 border outline-none border-pale-100/40"
+        className="flex w-48 flex-row items-center justify-between gap-4 rounded-[4px] border border-pale-100/50 bg-ink-900/85 px-4 py-2 font-mono text-[12px] text-pale-100 outline-none backdrop-blur-[6px]"
       >
-        <Select.Value />
+        <Select.Value placeholder="Select a model" />
         <ArrowY />
       </Select.Trigger>
       <Select.Portal>
-        <Select.Content className="z-50 border bg-ink-900 border-pale-100/40">
+        <Select.Content
+          position="popper"
+          sideOffset={4}
+          className="z-50 rounded-[4px] border border-pale-100/40 bg-ink-900/95 backdrop-blur-[6px]"
+        >
           <Select.Viewport className="flex flex-col p-1">
             {ArtifactIndex.map((artifact) => (
               <Select.Item
                 key={artifact.name}
                 value={artifact.name}
-                className="px-3 py-1.5 font-mono text-[12px] text-pale-100 outline-none cursor-pointer hover:bg-pale-100/10"
+                className="cursor-pointer px-3 py-1.5 font-mono text-[12px] text-pale-100 outline-none data-[highlighted]:bg-pale-100/10"
               >
                 <Select.ItemText>{artifact.name}</Select.ItemText>
               </Select.Item>

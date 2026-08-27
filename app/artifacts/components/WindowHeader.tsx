@@ -1,7 +1,6 @@
 "use client"
 
 import { useArtifact } from "./ArtifactContext"
-import { ArtifactSelector } from "./ArtifactSelector"
 import { ArtifactDatabaseIcon } from "@/public/icons"
 
 export default function WindowHeader() {
@@ -14,10 +13,11 @@ export default function WindowHeader() {
         Artifact Database
       </span>
       <span className="self-stretch w-px bg-pale-100/50" />
+      {/* The dropdown that used to sit here moved out to the selector button
+          in the top-right; this is now purely a readout of what's loaded. */}
       <span className="whitespace-nowrap font-mono text-[16px] font-bold text-pale-100">
         {selectedArtifact}
       </span>
-      <ArtifactSelector />
     </div>
   )
 }

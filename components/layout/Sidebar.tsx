@@ -42,20 +42,25 @@ export function Sidebar() {
         // the rail's contents into the lower third. Vertically centred now
         // (see justify-center below), which is what the kit's GlobalNav does.
         "fixed inset-y-0 left-0 z-30 flex transition-all duration-500 ease-in-out",
-        collapsed ? "w-[110px]" : "w-[280px]"
+        collapsed ? "w-24" : "w-60"
       )}
     >
       <div
         className={cn(
-          // Translucent + blurred so the page reads through the rail. bg-card
-          // on the nav box below is a dead class (no `card` colour in
-          // tailwind.config.js), so this is the rail's only background layer.
-          "flex flex-col justify-center gap-5 w-full h-full bg-background/60 backdrop-blur-[6px] text-foreground transition-all duration-500 ease-in-out overflow-visible",
-          collapsed ? "w-[110px]" : "md:w-[280px]"
+          // No background here any more — the translucent ground belongs to
+          // the chrome frame (the bordered nav box) only, so the wordmark and
+          // version chip sit directly on the page.
+          "flex flex-col justify-center gap-5 w-full h-full text-foreground transition-all duration-500 ease-in-out overflow-visible",
+          collapsed ? "w-24" : "md:w-60"
         )}
       >
         {/* Logo */}
-        <div className="relative z-0 flex pt-6 pb-2 pl-5">
+        <div
+          className={cn(
+            "relative z-0 flex pt-6 pb-2 transition-all duration-500 ease-in-out",
+            collapsed ? "justify-center pl-0" : "pl-5"
+          )}
+        >
           <Link
             href="/"
             className="inline-flex justify-start h-6 gap-2 text-[22px] font-bold tracking-[-0.02em] font-instrument"
@@ -88,8 +93,10 @@ export function Sidebar() {
             // No flex-1/h-full — those made the nav box fill the rail, which
             // would defeat the parent's justify-center. Content-height now, so
             // the whole stack centres as one block.
-            "flex flex-col justify-between bg-card transition-all duration-500 ease-in-out",
-            collapsed ? "w-[110px]" : "md:w-[280px]"
+            // This is the chrome frame, so it carries the rail's translucent
+            // ground (replacing the dead bg-card, which resolved to nothing).
+            "flex flex-col justify-between bg-background/60 backdrop-blur-[6px] transition-all duration-500 ease-in-out",
+            collapsed ? "w-24" : "md:w-60"
           )}
         >
           <div className="flex w-full h-4 border-t border-r border-tan" />
@@ -107,7 +114,12 @@ export function Sidebar() {
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-start p-4">
+          <div
+            className={cn(
+              "flex items-center p-4 transition-all duration-500 ease-in-out",
+              collapsed ? "justify-center" : "justify-start"
+            )}
+          >
             <ThemeToggle collapsed={collapsed} />
           </div>
           <div className="flex w-full h-4 border-b border-r border-tan" />

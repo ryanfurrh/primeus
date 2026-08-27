@@ -1,11 +1,10 @@
-/* Cancels the root layout's symmetric gutter so the 3D stage runs
-   edge-to-edge under the floating rail — the spec's "the artifact viewport
-   sets that padding to 0 and runs full-bleed". Width is left auto (not
-   w-full) so the negative margins expand it to exactly the viewport width
-   rather than overflowing. The chrome inside still respects the gutter. */
+/* Neutral. The full-bleed cancel used to live here, but this layout also
+   wraps app/artifacts/[model], so that route lost the gutter too and its
+   content ended up underneath the floating rail. Only the stage page runs
+   edge-to-edge, so the cancel now sits on app/artifacts/page.tsx itself. */
 export default function ArtifactsLayout({ children }) {
   return (
-    <div className="flex h-full flex-col -mx-6 md:-mx-[110px]">
+    <div className="flex h-full flex-col">
       <main className="flex w-full h-full">{children}</main>
     </div>
   )

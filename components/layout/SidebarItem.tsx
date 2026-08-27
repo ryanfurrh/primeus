@@ -21,7 +21,10 @@ export const SidebarItem = forwardRef<ScrambleInHandle, SidebarItemProps>(
       <Link
         href={`/${item.slug}`}
         className={cn(
-          "group flex items-center h-4 pr-3 pl-5 py-4 text-sm font-medium transition-all duration-500 ease-in-out gap-3",
+          "group flex items-center h-4 py-4 text-sm font-medium transition-all duration-500 ease-in-out",
+          // Collapsed there's no label, so the icon centres in the rail rather
+          // than staying pinned to the old asymmetric pl-5/pr-3 inset.
+          collapsed ? "justify-center px-0 gap-0" : "pl-5 pr-3 gap-3",
           isActive
             ? "bg-nav-current text-sand-900 dark:bg-nav-current-dark dark:text-ink-50 shadow-[inset_2px_0_0_0_theme(colors.sand.700)] dark:shadow-[inset_2px_0_0_0_theme(colors.pale.100)] transition-all ease-in-out"
             : "text-muted-foreground hover:bg-nav-hover dark:hover:bg-nav-hover-dark hover:text-foreground dark:hover:text-pale-100"

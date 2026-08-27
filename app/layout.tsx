@@ -37,10 +37,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 whole viewport and every surface centres in it. The gutter is
                 the collapsed rail width on BOTH sides — symmetric, so content
                 is centred in the viewport rather than pushed right by the
-                rail. Surfaces that want the full width (Artifacts' 3D stage)
-                opt out in their own layout. */}
+                rail. Keep this in step with Sidebar's collapsed width (w-24).
+                Surfaces that want the full width (Artifacts' 3D stage) opt
+                out in their own layout. */}
             <div className="flex flex-col flex-1 h-full overflow-hidden">
-              <main className="flex-1 overflow-y-auto overflow-x-hidden px-6 md:px-[110px]">
+              <main className="flex-1 overflow-y-auto overflow-x-hidden px-6 md:px-24">
                 {children}
                 <Analytics />
               </main>
