@@ -85,7 +85,9 @@ export default function HomePage() {
 
           {/* "Welcome." moved out to the heading above the stage, so the only
               caption left floats at the bottom. */}
-          <div className="absolute inset-0 z-10 flex flex-col items-center justify-end p-8 pointer-events-none">
+          {/* pb-14 rather than the p-8 all round — lifts the caption a little
+              clear of the readout row pinned at the stage's bottom edge. */}
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-end p-8 pb-14 pointer-events-none">
             <span className="px-3 py-1.5 border border-sand-300 dark:border-ink-100/40 bg-sand-100/70 dark:bg-ink-800/70 font-mono text-[16px] text-sand-700 dark:text-pale-100">
               A record of the first age.
             </span>
