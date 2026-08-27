@@ -1,8 +1,9 @@
 // app/world/WorldClient.tsx
 "use client"
 
-import { useState, Fragment } from "react"
+import { useEffect, useState, Fragment } from "react"
 import { cn } from "@/lib/utils"
+import { useSidebar } from "@/components/layout/SidebarContext"
 import { PageHeader } from "@/components/PageHeader"
 import { Readout } from "@/components/data/Readout"
 import { CalibratedText } from "@/components/data/CalibratedText"
@@ -18,7 +19,17 @@ import type { WorldFrame } from "@/lib/getWorldFrames"
    components/data/CalibratedText.tsx), real linksOut/citedBy resolved from
    actual [[wikilinks]] in the vault, not fabricated. */
 export function WorldClient({ frames }: { frames: WorldFrame[] }) {
+  const { setCollapsed } = useSidebar()
   const [no, setNo] = useState(frames[0]?.no ?? "001")
+
+  /* Three columns plus a reel head need the width, so the rail steps aside
+     on arrival — same reasoning as the archive collapsing it for the light
+     table. Mount only: it doesn't fight you if you expand it again while
+     reading. setCollapsed is a raw useState setter, so it's stable and this
+     runs once. */
+  useEffect(() => {
+    setCollapsed(true)
+  }, [setCollapsed])
   const frame = frames.find((x) => x.no === no) ?? frames[0]
   const folders = Array.from(new Set(frames.map((p) => p.folder)))
   const mean = frames.reduce((a, p) => a + p.fidelity, 0) / frames.length

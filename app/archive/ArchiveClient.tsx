@@ -53,7 +53,7 @@ export function ArchiveClient({ records }: { records: DisclosureFull[] }) {
 
   return (
     <div className="relative flex flex-1 flex-col min-h-[600px]">
-      <GridBackdrop variant="graph" />
+      <GridBackdrop variant="graph" fullBleed />
       <PageHeader
         name="Archive"
         icon={<DocumentationIcon className="h-4 w-4" />}

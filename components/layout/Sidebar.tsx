@@ -44,7 +44,7 @@ export function Sidebar() {
         // the rail's contents into the lower third. Vertically centred now
         // (see justify-center below), which is what the kit's GlobalNav does.
         "fixed inset-y-0 left-0 z-30 flex transition-all duration-500 ease-in-out",
-        collapsed ? "w-18" : "w-52"
+        collapsed ? "w-18" : "w-44"
       )}
     >
       <div
@@ -53,7 +53,7 @@ export function Sidebar() {
           // the chrome frame (the bordered nav box) only, so the wordmark and
           // version chip sit directly on the page.
           "flex flex-col justify-center gap-5 w-full h-full text-foreground transition-all duration-500 ease-in-out overflow-visible",
-          collapsed ? "w-18" : "md:w-52"
+          collapsed ? "w-18" : "md:w-44"
         )}
       >
         {/* Logo */}
@@ -107,7 +107,7 @@ export function Sidebar() {
             // This is the chrome frame, so it carries the rail's translucent
             // ground (replacing the dead bg-card, which resolved to nothing).
             "flex flex-col justify-between bg-background/60 backdrop-blur-[6px] transition-all duration-500 ease-in-out",
-            collapsed ? "w-18" : "md:w-52"
+            collapsed ? "w-18" : "md:w-44"
           )}
         >
           <div className="flex w-full h-4 border-t border-r border-tan" />
