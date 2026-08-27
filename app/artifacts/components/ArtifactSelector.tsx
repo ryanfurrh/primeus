@@ -17,13 +17,20 @@ import { ArrowY } from "@/public/icons"
 export function ArtifactSelector() {
   const { selectedArtifact, setSelectedArtifact } = useArtifact()
 
+  /* Welcome is the landing state rather than a thing you chose, so the
+     trigger reads as an invitation while it's loaded. Radix only shows the
+     placeholder when the value is empty, hence blanking it here — the
+     context still holds "Welcome", so the stage and the title bar readout
+     are unaffected. */
+  const isLanding = selectedArtifact === "Welcome"
+
   return (
-    <Select.Root value={selectedArtifact} onValueChange={setSelectedArtifact}>
+    <Select.Root value={isLanding ? "" : selectedArtifact} onValueChange={setSelectedArtifact}>
       <Select.Trigger
         aria-label="Artifact"
         className="flex w-48 flex-row items-center justify-between gap-4 rounded-[4px] border border-pale-100/50 bg-ink-900/85 px-4 py-2 font-mono text-[12px] text-pale-100 outline-none backdrop-blur-[6px]"
       >
-        <Select.Value placeholder="Select a model" />
+        <Select.Value placeholder="Select an artifact" />
         <ArrowY />
       </Select.Trigger>
       <Select.Portal>
@@ -34,10 +41,14 @@ export function ArtifactSelector() {
         >
           <Select.Viewport className="flex flex-col p-1">
             {ArtifactIndex.map((artifact) => (
+              /* Welcome is listed by name, but it's only a destination once
+                 you've gone somewhere else — no point offering a way back to
+                 the state you're already in. */
               <Select.Item
                 key={artifact.name}
                 value={artifact.name}
-                className="cursor-pointer px-3 py-1.5 font-mono text-[12px] text-pale-100 outline-none data-[highlighted]:bg-pale-100/10"
+                disabled={artifact.name === "Welcome" && isLanding}
+                className="cursor-pointer px-3 py-1.5 font-mono text-[12px] text-pale-100 outline-none data-[highlighted]:bg-pale-100/10 data-[disabled]:cursor-default data-[disabled]:opacity-40"
               >
                 <Select.ItemText>{artifact.name}</Select.ItemText>
               </Select.Item>
