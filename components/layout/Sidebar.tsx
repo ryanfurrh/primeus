@@ -31,11 +31,23 @@ export function Sidebar() {
     })
   }, [items])
 
+  /* Floats over the page rather than taking a column from it, so every
+     surface can centre in the full viewport (see app/layout.tsx's symmetric
+     gutter). This is the rail model the design spec describes: absolute,
+     full height, "the page area does not lose a column to it". */
   return (
-    <aside className={cn("flex pt-96", collapsed ? "w-[110px]" : "w-[280px]")}>
+    <aside
+      className={cn(
+        "fixed inset-y-0 left-0 z-30 flex pt-96 transition-all duration-500 ease-in-out",
+        collapsed ? "w-[110px]" : "w-[280px]"
+      )}
+    >
       <div
         className={cn(
-          "flex flex-col justify-between w-full h-full bg-background text-foreground transition-all duration-500 ease-in-out overflow-visible",
+          // Translucent + blurred so the page reads through the rail. bg-card
+          // on the nav box below is a dead class (no `card` colour in
+          // tailwind.config.js), so this is the rail's only background layer.
+          "flex flex-col justify-between w-full h-full bg-background/60 backdrop-blur-[6px] text-foreground transition-all duration-500 ease-in-out overflow-visible",
           collapsed ? "w-[110px]" : "md:w-[280px]"
         )}
       >

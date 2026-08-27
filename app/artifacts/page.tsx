@@ -38,14 +38,17 @@ const ArtifactsPage = () => {
       <ViewPortal />
       <WindowHeader />
 
-      {/* ModelSelect is the real, separate entry point into the per-model
-          detail route (/artifacts/[model]) — kept reachable from the main
-          page rather than dropped, since that route has to keep working. */}
-      <div className="absolute z-20 top-6 left-6">
-        <ModelSelect />
-      </div>
-
-      <div className="absolute z-20 top-20 right-4 bottom-4 flex w-64 flex-col gap-3 pointer-events-none md:w-72">
+      {/* All floating chrome lives in two zones that can't collide with the
+          rail: the centred title bar, and this right-hand column inset to the
+          same gutter the other surfaces use. ModelSelect moved here from the
+          top-left corner — at left-[110px] it cleared the collapsed rail but
+          was buried under the expanded one (280px), and the rail sits above
+          it at z-30. It's the real, separate entry point into the per-model
+          detail route (/artifacts/[model]), so it has to stay reachable. */}
+      <div className="absolute z-20 top-20 right-6 bottom-6 flex w-64 flex-col gap-3 pointer-events-none md:right-[110px] md:w-72">
+        <div className="self-end pointer-events-auto">
+          <ModelSelect />
+        </div>
         <div className="pointer-events-auto">
           <ArtifactData />
         </div>

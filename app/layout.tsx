@@ -35,8 +35,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           >
             <Sidebar />
 
+            {/* The rail is fixed-position (out of flow), so this fills the
+                whole viewport and every surface centres in it. The gutter is
+                the collapsed rail width on BOTH sides — symmetric, so content
+                is centred in the viewport rather than pushed right by the
+                rail. Surfaces that want the full width (Artifacts' 3D stage)
+                opt out in their own layout. */}
             <div className="flex flex-col flex-1 h-full overflow-hidden">
-              <main className="flex-1 overflow-y-auto">
+              <main className="flex-1 overflow-y-auto overflow-x-hidden px-6 md:px-[110px]">
                 {children}
                 <Analytics />
               </main>
