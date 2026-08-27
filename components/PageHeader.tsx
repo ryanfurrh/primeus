@@ -1,23 +1,34 @@
-import Link from "next/link";
-import { useSelectedLayoutSegment } from "next/navigation";
-import localFont from "next/font/local";
-import { WorldIcon } from "@/public/icons";
+// components/PageHeader.tsx
+import { ReactNode } from "react"
+import { cn } from "@/lib/utils"
 
-export function PageHeader(props: {
-  name: string;
-  description: string;
-  icon: any;
-}) {
+interface PageHeaderProps {
+  name: string
+  icon?: ReactNode
+  readout?: string
+  className?: string
+}
+
+/* The section nameplate: a tab hanging off the top edge of the screen,
+   hairline on three sides, tracked uppercase. Square — the chassis has no
+   radius. Ported from the design system's components/chrome/PageHeader.jsx. */
+export function PageHeader({ name, icon, readout, className }: PageHeaderProps) {
   return (
-    <div className="flex justify-center flex-auto px-4 pt-0 pb-0 mb-6 text-center md:px-12">
-      <div className="flex flex-col gap-0 py-2 rounded-b-[0.25rem] border-l-1 border-r-1 border-b-1 place-items-center dark:bg-ink-800/20 bg-sand-400/20 dark:border-bone-50 border-sand-600 text-sand-600 dark:text-bone-50 ">
-        {props.icon}
-        <h1 className="px-12 text-xs font-bold tracking-wider leading-[1.5rem] font-stretch md:px-16 font-archivo">
-          {props.name}
-        </h1>
+    <div className={cn("flex items-stretch justify-center", className)}>
+      <div className="flex items-center h-10 gap-3 px-6 border-b border-l border-r border-sand-400 bg-sand-100 dark:border-ink-100 dark:bg-ink-800">
+        {icon}
+        <span className="font-instrument text-[12px] font-bold uppercase tracking-[0.10em] whitespace-nowrap text-sand-900 dark:text-ink-50">
+          {name}
+        </span>
+        {readout ? (
+          <>
+            <span className="self-stretch w-px bg-sand-300 dark:bg-pale-100/40" />
+            <span className="font-mono text-[12px] whitespace-nowrap text-sand-700 dark:text-pale-100">
+              {readout}
+            </span>
+          </>
+        ) : null}
       </div>
-
-      <p className="text-sand-500/70">{props.description}</p>
     </div>
-  );
+  )
 }

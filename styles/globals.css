@@ -31,3 +31,101 @@
     background: #c0a0b9;
   }
 }
+
+/* The disclosure sheet's scale. Full size on mobile, where the sheet
+   reflows to the pane width and needs its type legible; shrunk from md up,
+   where it's the fixed 604px paper sitting on the light table. `zoom`
+   rather than a transform so the element's layout box shrinks too and its
+   scroll pane measures correctly — see ArchiveClient. */
+.sheet-scale {
+  zoom: 1;
+}
+@media (min-width: 768px) {
+  .sheet-scale {
+    zoom: 0.66;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+
+    --tan: 19 25% 78%;
+    --peach: 5 39% 78%;
+
+    --gray: 0 0% 85%;
+    --gray-light: 0 0% 95%;
+
+    --teal: 171 33% 61%;
+    --teal-light: 170 61% 83%;
+    --teal-dark: 169 14% 30%;
+
+    --orange: 22 38% 72%;
+    --orange-light: 22 70% 90%;
+    --orange-dark: 22 31% 48%;
+
+    --green: 129 60% 60%;
+    --green-light: 129 60% 93%;
+    --green-dark: 129 5% 36%;
+
+    --red: 350 76% 73%;
+    --red-light: 350 82% 86%;
+    --red-dark: 350 28% 49%;
+
+    --blue: 188 32% 76%;
+    --blue-light: 188 50% 90%;
+    --blue-dark: 188 14% 41%;
+
+    --navy: 209 26% 54%;
+    --navy-light: 209 44% 88%;
+    --navy-dark: 209 20% 33%;
+
+    --purple: 322 32% 73%;
+    --purple-light: 322 81% 89%;
+    --purple-dark: 322 21% 38%;
+  }
+
+  .dark {
+    --background: 0 0% 6%;
+    --foreground: 120 2% 90%;
+
+    --tan: 19 25% 78%;
+    --peach: 5 39% 78%;
+
+    --gray: 0 0% 15%;
+    --gray-light: 0 0% 25%;
+
+    --teal: 171 33% 61%;
+    --teal-light: 170 61% 83%;
+    --teal-dark: 169 14% 30%;
+
+    --orange: 22 38% 72%;
+    --orange-light: 22 70% 90%;
+    --orange-dark: 22 31% 48%;
+
+    --green: 129 60% 60%;
+    --green-light: 129 60% 93%;
+    --green-dark: 129 5% 36%;
+
+    --red: 350 76% 73%;
+    --red-light: 350 82% 86%;
+    --red-dark: 350 28% 49%;
+
+    --blue: 188 32% 76%;
+    --blue-light: 188 50% 90%;
+    --blue-dark: 188 14% 41%;
+
+    --navy: 209 26% 54%;
+    --navy-light: 209 44% 88%;
+    --navy-dark: 209 20% 33%;
+
+    --purple: 322 32% 73%;
+    --purple-light: 322 81% 89%;
+    --purple-dark: 322 21% 38%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}

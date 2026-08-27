@@ -1,0 +1,8 @@
+/node_modules
+/bower_components
+/vendor
+/tmp
+/public
+/chrome_webstore
+/.vscode
+/README.md
