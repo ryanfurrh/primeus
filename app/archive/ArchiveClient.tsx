@@ -52,14 +52,17 @@ export function ArchiveClient({ records }: { records: DisclosureFull[] }) {
   const yearRange = years.length ? `${Math.min(...years.map(Number))}—${Math.max(...years.map(Number))}` : null
 
   return (
-    <div className="relative flex flex-1 flex-col min-h-[600px]">
+    /* h-full so the surface fits the viewport and the page itself never
+       scrolls — the sheet scrolls inside its own pane instead, and the
+       disclosure index scrolls inside its own. */
+    <div className="relative flex h-full flex-col">
       <GridBackdrop variant="graph" fullBleed />
       <PageHeader
         name="Archive"
         icon={<DocumentationIcon className="h-4 w-4" />}
         readout={`${String(records.length).padStart(2, "0")} RECORDS`}
       />
-      <div className="relative flex flex-1 flex-col">
+      <div className="relative flex flex-1 flex-col min-h-0">
         {!group ? (
           <ChooseSource records={records} groups={groups} yearRange={yearRange} onPick={setGroup} />
         ) : !record ? (
@@ -173,7 +176,7 @@ function ReadRecord({
   onBack: () => void
 }) {
   return (
-    <div className="flex flex-1 flex-row gap-6 p-6">
+    <div className="flex flex-1 flex-row gap-6 p-6 min-h-0">
       <div className="flex w-[296px] flex-shrink-0 flex-col overflow-auto border border-sand-300 dark:border-ink-100/40 bg-[rgba(38,38,38,0.08)] dark:bg-[rgba(38,38,38,0.62)]">
         <div className="flex h-10 flex-shrink-0 items-center justify-between border-b border-sand-300 dark:border-ink-100/40 px-4">
           <span className="font-instrument text-[12px] font-bold uppercase tracking-[0.10em] text-sand-900 dark:text-ink-50">
@@ -202,8 +205,13 @@ function ReadRecord({
           <CalibrationReadout fidelity={record.fidelity} />
           <Badge signal>Light Table</Badge>
         </div>
-        <div className="flex flex-1 min-h-0 justify-center overflow-hidden">
-          <div style={{ transform: "scale(0.66)", transformOrigin: "top center" }}>
+        {/* The sheet scrolls here, in its own pane. `zoom` rather than
+            `transform: scale` on purpose: a transform leaves the element's
+            layout box at full size, so the scroll range would be the
+            unscaled height and most of it empty. zoom shrinks the box
+            itself, so the scrollable area matches what you actually see. */}
+        <div className="flex w-full flex-1 min-h-0 justify-center overflow-y-auto overflow-x-hidden">
+          <div style={{ zoom: 0.66 }}>
             <DocumentSheet record={record} />
           </div>
         </div>
